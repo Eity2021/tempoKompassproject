@@ -1,0 +1,85 @@
+.custom-box-shadow {
+  --box-shadow-x: 10px;
+  --box-shadow-y: 14px;
+  --box-shadow-blur: 27px;
+  --box-shadow-spread: -1px;
+  --box-shadow-color: rgba(90, 90, 90, 0.26);
+
+  -webkit-box-shadow: var(--box-shadow-x) var(--box-shadow-y)
+    var(--box-shadow-blur) var(--box-shadow-spread) var(--box-shadow-color);
+  -moz-box-shadow: var(--box-shadow-x) var(--box-shadow-y)
+    var(--box-shadow-blur) var(--box-shadow-spread) var(--box-shadow-color);
+  box-shadow: var(--box-shadow-x) var(--box-shadow-y) var(--box-shadow-blur)
+    var(--box-shadow-spread) var(--box-shadow-color);
+}
+.box-shadow {
+  --box-shadow-x: 33px;
+  --box-shadow-y: 36px;
+  --box-shadow-blur: 100px;
+  --box-shadow-spread: 8px;
+  --box-shadow-color: rgba(90, 90, 90, 0.26);
+
+  -webkit-box-shadow: var(--box-shadow-x) var(--box-shadow-y)
+    var(--box-shadow-blur) var(--box-shadow-spread) var(--box-shadow-color);
+  -moz-box-shadow: var(--box-shadow-x) var(--box-shadow-y)
+    var(--box-shadow-blur) var(--box-shadow-spread) var(--box-shadow-color);
+  box-shadow: var(--box-shadow-x) var(--box-shadow-y) var(--box-shadow-blur)
+    var(--box-shadow-spread) var(--box-shadow-color);
+}
+.box-shadow2 {
+  --box-shadow-x: -4px;
+  --box-shadow-y: -8px;
+  --box-shadow-blur: 20px;
+  --box-shadow-spread: 12px;
+  --box-shadow-color: rgb(217 217 217 / 26%);
+  box-shadow: var(--box-shadow-x) var(--box-shadow-y) var(--box-shadow-blur)
+    var(--box-shadow-spread) var(--box-shadow-color);
+}
+
+.slick-prev,
+.slick-next {
+  font-size: 0;
+  line-height: 0;
+  position: absolute;
+  top: 90%;
+  left: 108%;
+  display: block;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  transform: translate(0, -50%);
+  cursor: pointer;
+  color: transparent;
+  border: none;
+  outline: none;
+  background: transparent;
+  display: none;
+}
+.slick-next {
+  top: 367px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  content: "←";
+  font-family: "slick";
+  font-size: 37px;
+  line-height: 1;
+  opacity: 0.75;
+  color: #11989f;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  display: none;
+}
+h3 {
+  font-size: 18px;
+  margin: 10px;
+  padding: 0% 0;
+  position: relative;
+  color: #000;
+  text-align: center;
+  height: 198px;
+  width: 390px;
+  overflow: hidden;
+}

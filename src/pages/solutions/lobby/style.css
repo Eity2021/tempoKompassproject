@@ -1,0 +1,72 @@
+body {
+  background: #fff;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.boxSize {
+  width: 300px;
+  height: 400px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 15px;
+}
+
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.swiper-slide:nth-child(1n) {
+  background-color: #fff;
+  
+}
+
+.swiper-slide:nth-child(2n) {
+  background-color:  #fff;
+}
+
+.swiper-slide:nth-child(3n) {
+  background-color:  #fff;
+}
+
+.swiper-slide:nth-child(4n) {
+  background-color:  #fff;
+}
+
+.swiper-slide:nth-child(5n) {
+  background-color:  #fff;
+}
+
+.swiper-slide:nth-child(6n) {
+  background-color: #fff;
+}
+
+.swiper-slide:nth-child(7n) {
+  background-color:  #fff;
+}
+
+.swiper-slide:nth-child(8n) {
+  background-color:  #fff;
+}
+
+.swiper-slide:nth-child(9n) {
+  background-color:  #fff;
+}
+
+.swiper-slide:nth-child(10n) {
+  background-color:  #fff;
+}

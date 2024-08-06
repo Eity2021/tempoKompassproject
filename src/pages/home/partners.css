@@ -1,0 +1,31 @@
+.partnersSwiper{
+
+.swiper-button-prev{
+
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #0c1e21;
+    box-shadow:darkolivegreen;
+    margin-top: -14px;
+}
+
+.swiper-button-prev:after {
+    content: 'prev';
+    font-size: 22px;
+    color:#fff;
+}
+.swiper-button-next{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #0c1e21;
+    box-shadow:darkolivegreen;
+    margin-top: -14px;
+}
+.swiper-button-next:after{
+    content: 'next';
+    font-size: 22px;
+    color:#fff;
+}
+}

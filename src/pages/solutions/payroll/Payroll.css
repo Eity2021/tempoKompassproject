@@ -1,0 +1,8 @@
+.accordion-simple > .active{
+    display:block
+    
+}
+
+.accordion__section .inactive{
+    display:none;
+}
