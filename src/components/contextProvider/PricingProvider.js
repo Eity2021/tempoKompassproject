@@ -77,7 +77,8 @@ import React, {
         });
       return () => controller.abort();
     }, []);
-  
+
+ 
     return (
       <PricingContext.Provider
         value={{
@@ -123,7 +124,7 @@ import React, {
           setIsOpen,
           toggleDrawer,
           selectedView,setSelectedView,
-          eventView,setEventView
+          eventView,setEventView,
         }}
       >
         {children}

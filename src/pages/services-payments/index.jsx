@@ -1,17 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useContextProvider } from "../../../components/contextProvider/PricingProvider";
+import React, { useState, useEffect } from "react";
+import { useContextProvider } from "../../components/contextProvider/PricingProvider";
 import { Link } from "react-router-dom";
-import Invoice from "../pricing/Invoice";
 import Lottie from "lottie-react";
-// import paymentSuccessful from "../../PaymentSuccessful.json";
 import Failed from "../../Failed.json";
-import ServicesPayments from "../services-payments/ServicesPayments";
-import { useNavigate } from "react-router-dom";
 import paymentSuccessful from "../../assets/Nimages/paymentSuccessful.png";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
-export default function EPayStatus() {
+export default function ServicesPayments() {
   const [ecode, setEcode] = useState(null);
   const [sts, setSts] = useState(null);
   const [msg, setMsg] = useState(null);
@@ -19,16 +15,10 @@ export default function EPayStatus() {
   const [typr, setTypr] = useState(null);
   // console.log(odrx)
   const { setCart } = useContextProvider();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    // for (const [key, value] of params) {
-    //   console.log(`${key}:${value}`);
-    // }
-    // console.log(params);
 
-    // Retrieve the data from the query parameters
     const ecode = params.get("code");
     const sts = params.get("status");
     const msg = params.get("message");
@@ -47,10 +37,6 @@ export default function EPayStatus() {
     }
   }, []);
 
-  function handleClick() {
-    navigate(<ServicesPayments></ServicesPayments>);
-  }
-
   useEffect(() => {
     const odrx = sessionStorage.getItem("odrx");
     const typr = sessionStorage.getItem("typr");
@@ -60,7 +46,7 @@ export default function EPayStatus() {
       const { signal } = controller;
 
       fetch(
-        `https://api.hellokompass.com/getinvoicedetails?ordrx=${odrx}&typr=${typr}`,
+        `https://api.hellokompass.com/pdfinvoice?ordrx=${odrx}&typr=${typr}`,
         {
           // order_id
           signal,
@@ -69,13 +55,11 @@ export default function EPayStatus() {
         .then((res) => res.json())
         .then((res) => {
           setOdrx(res.data);
-          handleClick();
         });
 
       return () => controller.abort();
     }
   }, []);
-
   return (
     <div>
       {(() => {
@@ -83,7 +67,7 @@ export default function EPayStatus() {
           localStorage.removeItem("cart");
           setCart([]);
           return (
-            <div className="container ">
+            <div className="container mt-[120px]">
               <div className="grid  md:grid-cols-1   lg:grid-cols-2">
                 <div className="flex justify-center items-center h-full">
                   <div className="text-center">
@@ -111,7 +95,7 @@ export default function EPayStatus() {
                 </div>
 
                 <div className="mx-4">
-                  <Invoice odrx={odrx}></Invoice>
+                  {/* <Invoice odrx={odrx}></Invoice> */}
                 </div>
               </div>
             </div>

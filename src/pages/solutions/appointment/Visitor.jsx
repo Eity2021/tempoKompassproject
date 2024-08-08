@@ -73,7 +73,7 @@ export default function Visitor() {
   const toggleFAQ = (index) => {
     setFaqs(
       faqs.map((faq, i) => {
-        if (i == index) {
+        if (i === index) {
           faq.open = !faq.open;
         } else {
           faq.open = false;

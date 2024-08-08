@@ -35,7 +35,7 @@ export default function QuickPay() {
   const [accordionActive, setActiveAccordion] = useState(-1);
 
   function toggleAccordion(index) {
-    if (index == accordionActive) {
+    if (index === accordionActive) {
       setActiveAccordion(-1);
       return;
     }
@@ -66,14 +66,14 @@ export default function QuickPay() {
                         <div className=" text-[18px] font-medium font-poppins text-[#545454] flex justify-between  pt-3 transition duration-250 ease-in-out ">
                           <h4
                             className={
-                              accordionActive == index ? "active" : ""
+                              accordionActive === index ? "active" : ""
                             }
                           >
                             {item.question}
                           </h4>
                           <span>
                             {" "}
-                            {accordionActive == index ? (
+                            {accordionActive === index ? (
                               <>
                                 <span className="vertical text-[18px] font-medium font-poppins text-[#545454]">
                                   -
@@ -92,7 +92,7 @@ export default function QuickPay() {
                         <div className=" text-[16px] font-regular  text-[#4F6169] mb-4 pr-8 font-poppins">
                           <p
                             className={
-                              accordionActive == index ? "active" : "inactive"
+                              accordionActive === index ? "active" : "inactive"
                             }
                           >
                             {item.answer}

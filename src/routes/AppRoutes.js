@@ -4,7 +4,6 @@ import { Route, Routes } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import ScrollToTop from "../components/scrollToTop/ScrollToTop";
 
-
 const Home = lazy(() => import("../pages/home"));
 const About = lazy(() => import("../pages/about"));
 const Appointment = lazy(() => import("../pages/solutions/appointment"));
@@ -15,18 +14,17 @@ const Processing = lazy(() =>
   import("../pages/pagesForCart/processingPage/Processing")
 );
 const Pricing = lazy(() => import("../pages/pricing"));
- const Privacy = lazy(() => import("../pages/privacy"));
+const Privacy = lazy(() => import("../pages/privacy"));
 const Terms = lazy(() => import("../pages/terms"));
+const ServicesPayments = lazy(() => import("../pages/services-payments"));
 
 const TermsOfPayment = lazy(() => import("../pages/termsOfPayment"));
 const TawkToChat = lazy(() => import("../components/tawkto/TawkToChat"));
 const Reports = lazy(() => import("../pages/reports"));
-
-// const EPayStatus = lazy(() => import("./pages/ePayStatus-services/EPayStatus"));
 const Event = lazy(() => import("../pages/events"));
 const DetailsViewPage = lazy(() =>
- import("../pages/events/viewPage/DetailsViewPage")
- );
+  import("../pages/events/viewPage/DetailsViewPage")
+);
 
 const NotFound = lazy(() => import("../pages/notFound"));
 export default function AppRoutes() {
@@ -47,12 +45,10 @@ export default function AppRoutes() {
         <Route path="/terms" element={<Terms />} />
         <Route path="/termsOfPayment" element={<TermsOfPayment />} />
         <Route path="/reports" element={<Reports />} />
+        <Route path="/services-payments" element={<ServicesPayments />} />
         <Route path="/corporate-events" element={<Event />} />
         <Route path="/events-view" element={<DetailsViewPage />} />
-        {/* 
-       
-        <Route path="/services-payments" element={<EPayStatus />} />
-        */}
+
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer />

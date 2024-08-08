@@ -20,7 +20,8 @@ import { useContextProvider } from "../../components/contextProvider/PricingProv
 const PricingShow = ({ pricingData, changeToggle, setChangeToggle }) => {
   const { customizeModal, setCustomizeModal, modalVisible, setModalVisible } =
     useContextProvider();
-  let [spinner, setSpinner] = useState(false);
+  const [spinner, setSpinner] = useState(false);
+  
   useEffect(() => {
     setSpinner(true);
     setTimeout(() => {
@@ -71,15 +72,9 @@ const PricingShow = ({ pricingData, changeToggle, setChangeToggle }) => {
             <div>
               {spinner ? (
                 <div >
-                  {/* <DotLoader
-                    justify="center"
-                    color={"#12a9b2"}
-                    loading={spinner}
-                  /> */}
-          <PricingLoader></PricingLoader>
-          {/* <PricingLoader></PricingLoader>
-          <PricingLoader></PricingLoader>
-          <PricingLoader></PricingLoader> */}
+                 
+              <PricingLoader></PricingLoader>
+        
                 </div>
               ) : (
                 <Swiper
