@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import ScrollToTop from "../components/scrollToTop/ScrollToTop";
 
+
 const Home = lazy(() => import("../pages/home"));
 const About = lazy(() => import("../pages/about"));
 const Appointment = lazy(() => import("../pages/solutions/appointment"));
@@ -27,6 +28,7 @@ const DetailsViewPage = lazy(() =>
 );
 
 const NotFound = lazy(() => import("../pages/notFound"));
+const Invoice  = lazy(() => import("../pages/pagesForCart/invoice/Invoice"));
 export default function AppRoutes() {
   return (
     <div>
@@ -48,6 +50,7 @@ export default function AppRoutes() {
         <Route path="/services-payments" element={<ServicesPayments />} />
         <Route path="/corporate-events" element={<Event />} />
         <Route path="/events-view" element={<DetailsViewPage />} />
+        <Route path="/invoice" element={<Invoice />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
