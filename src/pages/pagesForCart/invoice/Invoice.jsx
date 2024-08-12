@@ -18,7 +18,7 @@ export default function Invoice() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const odrx = params.get("odrx");
-    const typr = params.get("odrxtyp");
+    const typr = params.get("odrxtypr");
     const code = params.get("code");
     const status = params.get("status");
     const message = params.get("message");
@@ -75,16 +75,17 @@ export default function Invoice() {
     
   }, []);
   return (
-    <div className="h-full">
+    <div className="mt-[5%] h-full">
       {(() => {
         if ((code === '200') ) {
           localStorage.removeItem("cart");
           setCart([]);
           return (
-            <div className="container mt-[120px]">
-              <div className="grid  md:grid-cols-1   lg:grid-cols-2">
-                <div className="flex justify-center items-center h-full">
-                  <div className="text-center">
+            <div className="container">
+              <div className="grid  md:grid-cols-1 lg:grid-cols-2">
+                <div className="hidden lg:flex justify-center items-center h-full ">
+                  <div className="h-[85vh] flex items-center">
+                  <div className="text-center ">
                     <div className="flex justify-center">
                       <div className="w-[15rem] ">
                         {/* <Lottie animationData={paymentSuccessful} /> */}
@@ -108,17 +109,21 @@ export default function Invoice() {
                       </Link>
                     </div>
                   </div>
+                    </div>
                 </div>
 
                 <div className="mx-4">
-                  <div>
+                  <div className="mt-20 lg:mt-0">
                     {pdfUrl ? (
                       <iframe
                         src={pdfUrl}
                         width="100%"
-                        height="1100px"
+            
                         title="PDF Viewer"
-                        style={{ border: "none", paddingTop: "90px" }}
+                        style={{
+                          height: window.innerWidth >= 1024 ? "1000px" : window.innerWidth >= 768 ? "800px" : "600px",
+                          border: "none",
+                        }}
                       />
                     ) : (
                       <div className="pt-[99px]">
@@ -134,7 +139,8 @@ export default function Invoice() {
           localStorage.removeItem("cart");
           setCart([]);
           return (
-            <div className="flex justify-center items-center h-full 2xl:mt-[255px]  2xl:mb-[185px]  md:mt-[400px] my-32">
+           <div className="h-[85vh]">
+             <div className="flex justify-center items-center h-full ">
               <div className="text-center">
                 <div className="flex justify-center">
                   <div className="w-[15rem] ">
@@ -155,12 +161,14 @@ export default function Invoice() {
                 </div>
               </div>
             </div>
+            </div>
           );
         } else if (code === "401") {
           localStorage.removeItem("cart");
           setCart([]);
           return (
-            <div className="flex justify-center items-center h-full 2xl:mt-[255px]  2xl:mb-[185px]  md:mt-[400px] my-32">
+            <div className="h-[85vh]">
+              <div className="flex justify-center items-center h-full">
               <div className="text-center">
                 <div className="flex justify-center">
                   <div className="w-[15rem] ">
@@ -182,6 +190,7 @@ export default function Invoice() {
               </div>
               <div></div>
             </div>
+              </div>
           );
         } else {
           <></>;

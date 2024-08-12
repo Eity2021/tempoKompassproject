@@ -57,11 +57,11 @@ import React, {
       return () => controller.abort();
     }, []);
   
-    function submitData() {
-      setFinalData((finalData) => [...finalData, userData]);
-      setUserData("");
-      setPage("checkout");
-    }
+    // function submitData() {
+    //   setFinalData((finalData) => [...finalData, userData]);
+    //   setUserData("");
+    //   setPage("checkout");
+    // }
   
     useEffect(() => {
       const controller = new AbortController();
@@ -74,7 +74,7 @@ import React, {
         })
         .catch((error) => {
           if (error.name === "AbortError") {
-            console.log("request cancelled");
+         <></>
           }
         });
       return () => controller.abort();

@@ -76,118 +76,127 @@ export default function ServicesPayments() {
   }, []);
 
   return (
-    <div className="h-full">
-      {(() => {
-        if ((code === '200') ) {
-          localStorage.removeItem("cart");
-          setCart([]);
-          return (
-            <div className="container mt-[120px]">
-              <div className="grid  md:grid-cols-1   lg:grid-cols-2">
-                <div className="flex justify-center items-center h-full">
-                  <div className="text-center">
-                    <div className="flex justify-center">
-                      <div className="w-[15rem] ">
-                        {/* <Lottie animationData={paymentSuccessful} /> */}
-                        <LazyLoadImage
-                          src={paymentSuccessful}
-                          alt="paymentSuccessful"
-                        />
-                      </div>
-                    </div>
-                    <h2 className="text-5xl font-bold text-primary mb-2">
-                      {status} !
-                    </h2>
-                    <h2 className="mb-6 text-[1rem] text-[#757575]">
-                      {message}
-                    </h2>
-                    <div>
-                      <Link to="/">
-                        <button className="btn bg-[#0C1E21]  font-poppins text-white font-regular text-[14px]">
-                          Back Home
-                        </button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mx-4">
-                  <div>
-                    {pdfUrl ? (
-                      <iframe
-                        src={pdfUrl}
-                        width="100%"
-                        height="1100px"
-                        title="PDF Viewer"
-                        style={{ border: "none", paddingTop: "90px" }}
+    <div className="mt-[5%] h-full">
+    {(() => {
+      if ((code === '200') ) {
+        localStorage.removeItem("cart");
+        setCart([]);
+        return (
+          <div className="container">
+            <div className="grid  md:grid-cols-1 lg:grid-cols-2">
+              <div className="hidden lg:flex justify-center items-center h-full ">
+                <div className="h-[85vh] flex items-center">
+                <div className="text-center ">
+                  <div className="flex justify-center">
+                    <div className="w-[15rem] ">
+                      {/* <Lottie animationData={paymentSuccessful} /> */}
+                      <LazyLoadImage
+                        src={paymentSuccessful}
+                        alt="paymentSuccessful"
                       />
-                    ) : (
-                      <div className="pt-[99px]">
-                        <p>Loading PDF...</p>
-                      </div>
-                    )}
+                    </div>
+                  </div>
+                  <h2 className="text-5xl font-bold text-primary mb-2">
+                    {status} !
+                  </h2>
+                  <h2 className="mb-6 text-[1rem] text-[#757575]">
+                    {message}
+                  </h2>
+                  <div>
+                    <Link to="/">
+                      <button className="btn bg-[#0C1E21]  font-poppins text-white font-regular text-[14px]">
+                        Back Home
+                      </button>
+                    </Link>
                   </div>
                 </div>
+                  </div>
               </div>
-            </div>
-          );
-        } else if (code === "400") {
-          localStorage.removeItem("cart");
-          setCart([]);
-          return (
-            <div className="flex justify-center items-center h-full 2xl:mt-[255px]  2xl:mb-[185px]  md:mt-[400px] my-32">
-              <div className="text-center">
-                <div className="flex justify-center">
-                  <div className="w-[15rem] ">
-                    <LazyLoadImage src={paymentFailed} alt="failed" />
-                  </div>
-                </div>
 
-                <h2 className="2xl:text-5xl  text-4xl font-bold text-[#FF0000] mb-2">
-                  {status}
-                </h2>
-                <h2 className="mb-6 text-[1rem] text-[#757575]">{message}</h2>
-                <div>
-                  <Link to="/">
-                    <button className="btn bg-[#0C1E21]  font-poppins text-white font-regular text-[14px]">
-                      Back Home
-                    </button>
-                  </Link>
+              <div className="mx-4">
+                <div className="mt-20 lg:mt-0">
+                  {pdfUrl ? (
+                    <iframe
+                      src={pdfUrl}
+                      width="100%"
+          
+                      title="PDF Viewer"
+                      style={{
+                        height: window.innerWidth >= 1024 ? "1000px" : window.innerWidth >= 768 ? "800px" : "600px",
+                        border: "none",
+                      }}
+                    />
+                  ) : (
+                    <div className="pt-[99px]">
+                      <p>Loading PDF...</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
-          );
-        } else if (code === "401") {
-          localStorage.removeItem("cart");
-          setCart([]);
-          return (
-            <div className="flex justify-center items-center h-full 2xl:mt-[255px]  2xl:mb-[185px]  md:mt-[400px] my-32">
-              <div className="text-center">
-                <div className="flex justify-center">
-                  <div className="w-[15rem] ">
-                    <LazyLoadImage src={paymentFailed} alt="failed" />
-                  </div>
+          </div>
+        );
+      } else if (code === "400") {
+        localStorage.removeItem("cart");
+        setCart([]);
+        return (
+         <div className="h-[85vh]">
+           <div className="flex justify-center items-center h-full ">
+            <div className="text-center">
+              <div className="flex justify-center">
+                <div className="w-[15rem] ">
+                  <LazyLoadImage src={paymentFailed} alt="failed" />
                 </div>
+              </div>
 
-                <h2 className="2xl:text-5xl  text-4xl font-bold text-[#FF0000] mb-2">
-                  {status}
-                </h2>
-                <h2 className="mb-6 text-[1rem] text-[#757575]">{message}</h2>
-                <div>
-                  <Link to="/">
-                    <button className="btn bg-[#0C1E21]  font-poppins text-white font-regular text-[14px]">
-                      Back Home
-                    </button>
-                  </Link>
+              <h2 className="2xl:text-5xl  text-4xl font-bold text-[#FF0000] mb-2">
+                {status}
+              </h2>
+              <h2 className="mb-6 text-[1rem] text-[#757575]">{message}</h2>
+              <div>
+                <Link to="/">
+                  <button className="btn bg-[#0C1E21]  font-poppins text-white font-regular text-[14px]">
+                    Back Home
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+          </div>
+        );
+      } else if (code === "401") {
+        localStorage.removeItem("cart");
+        setCart([]);
+        return (
+          <div className="h-[85vh]">
+            <div className="flex justify-center items-center h-full">
+            <div className="text-center">
+              <div className="flex justify-center">
+                <div className="w-[15rem] ">
+                  <LazyLoadImage src={paymentFailed} alt="failed" />
                 </div>
               </div>
-              <div></div>
+
+              <h2 className="2xl:text-5xl  text-4xl font-bold text-[#FF0000] mb-2">
+                {status}
+              </h2>
+              <h2 className="mb-6 text-[1rem] text-[#757575]">{message}</h2>
+              <div>
+                <Link to="/">
+                  <button className="btn bg-[#0C1E21]  font-poppins text-white font-regular text-[14px]">
+                    Back Home
+                  </button>
+                </Link>
+              </div>
             </div>
-          );
-        } else {
-          <></>;
-        }
-      })()}
-    </div>
+            <div></div>
+          </div>
+            </div>
+        );
+      } else {
+        <></>;
+      }
+    })()}
+  </div>
   );
 }

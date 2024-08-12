@@ -16,7 +16,7 @@ const footer = {
 
 export default function Footer() {
   return (
-    <div className="bg-[#F8F8F8]  rounded-tr-[100px]">
+    <div className="bg-[#F8F8F8]  rounded-tr-[100px] ">
       <div className=" container px-[20px] py-[40px]">
         <div>
           <div className="border-primary  mb-6 w-36">
