@@ -4,12 +4,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Close from "../../../components/svg/store/Close";
 import WhiteArrow from "../../../components/svg/store/WhiteArrow";
 import { useContextProvider } from "../../../components/contextProvider/PricingProvider";
+import axios from "axios";
 
 export default function BookingModal({ setBookModal, selectedIdxe }) {
   const [checkNumber, setCheckNumber] = useState([]);
-  console.log(checkNumber);
+
   const {
-    pCode,
     isModalOpen,
     setIsModalOpen,
     PhoneHandle,
@@ -17,7 +17,7 @@ export default function BookingModal({ setBookModal, selectedIdxe }) {
     phoneCode,
     phoneNumber,
   } = useContextProvider();
-  console.log(phoneNumber);
+
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -32,39 +32,65 @@ export default function BookingModal({ setBookModal, selectedIdxe }) {
   // }
 
   useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
-    fetch(
-      `https://api.hellokompass.com/event/checkreg?phncod=${phoneCode}&phnr=${phoneNumber}&evntidx=${selectedIdxe}`,
-      { signal }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setCheckNumber(data.data);
+    if ((phoneNumber.length === 10 || phoneNumber.length === 11) && phoneCode && selectedIdxe) {
+      const controller = new AbortController();
+      const { signal } = controller;
 
-      })
-      .catch((error) => {
-        if (error.name === "AbortError") {
-          console.log("request cancelled");
-        }
-      });
-    return () => controller.abort();
+      fetch(
+        `https://api.hellokompass.com/event/checkreg?phncod=${phoneCode}&phnr=${phoneNumber}&evntidx=${selectedIdxe}`,
+        { signal }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setCheckNumber(data);
+        })
+        .catch((error) => {
+          if (error.name === "AbortError") {
+            console.log("Request cancelled");
+          } else {
+            console.error("Error:", error.message);
+          }
+        });
+
+      return () => controller.abort();
+    }
   }, [phoneCode, phoneNumber, selectedIdxe]);
 
-  const onSubmit = (data) => {
-    console.log(data);
 
-    // axios.post("https://api.hellokompass.com/trailinfo", data).then((res) => {
-    //   if (res.data.code === 200) {
-    //     setTrail(res.data);
-    //     toast.success(res.data.message);
-    //     setTrailModal(false);
-    //     reset();
-    //   } else {
-    //     toast(res.data.message);
-    //   }
-    // });
+  const onSubmit = (data) => {
+  
+
+    if (checkNumber && checkNumber.code === 200) {
+      axios.post("https://api.hellokompass.com/event/eventreg", data)
+        .then((res) => {
+          if (res.data.code === 200) {
+            // Handle success
+            console.log(res.data);
+            
+            // toast.success(res.data.message);
+            // setTrailModal(false);
+            // reset();
+          } else {
+            // Handle failure
+            console.log(res.data.message);
+            // toast.error(res.data.message);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error.message);
+          // Handle error
+          // toast.error("An error occurred during submission");
+        });
+    } else if (checkNumber && checkNumber.code === 400) {
+      // Handle case when checkNumber is 400
+      console.log("Check number is 400");
+      // You can add some logic or display an error message
+    } else {
+      // Handle any other case if necessary
+      console.log("Unexpected check number value");
+    }
   };
+  
 
   return (
     <div className="" isOpen={isModalOpen}>
@@ -98,14 +124,13 @@ export default function BookingModal({ setBookModal, selectedIdxe }) {
                 </p>
                 <div className="flex gap-2">
                   <div>
-                    <select
-                      name="countrycode"
-                      {...register("countrycode", { required: true })}
+                    <input
+                      name="c_code"
                       className=" input  hover:input-[#fff] rounded-none m-[0px]  w-full mt-2 border-b-[#ebebeb] border-t-transparent   border-r-transparent  border-l-transparent  bg-transparent focus:outline-none focus:ring-0 p-2 text-[#cdcdcd] text-[14px] font-[350]"
-                      defaultValue="88"
+                      value={`Bangladesh(${phoneCode})`}
                       onChange={phoneCodeHandle}
                     >
-                      {pCode?.map((code) => (
+                      {/* {pCode?.map((code) => (
                         <>
                           <option
                             className="text-[#686868]"
@@ -115,46 +140,28 @@ export default function BookingModal({ setBookModal, selectedIdxe }) {
                             {code.name}({code.pcode})
                           </option>
                         </>
-                      ))}
-                    </select>
+                      ))} */}
+                    </input>
                   </div>
 
                   <div className="w-full">
                     <input
                       type="number"
                       placeholder="Phone number"
-                      name="phonenumber"
+                      name="phone"
                       className=" input  hover:input-[#fff] rounded-none m-[0px]  w-full mt-2 border-b-[#ebebeb] border-t-transparent   border-r-transparent  border-l-transparent  bg-transparent focus:outline-none focus:ring-0 p-2 text-[#cdcdcd] text-[14px] font-[350]"
-                      {...register("phonenumber", { required: true })}
+                      {...register("phone", { required: true })}
                       onChange={PhoneHandle}
                     />
-                    <p className="label-text-alt text-[#fff] mt-3">
-                      {errors.phonenumber?.message}
-                    </p>
+                  
+                    <small className="text-[12px] text-[#fff] mt-3">
+                      {checkNumber.message}
+                    </small>
                   </div>
                 </div>
               </div>
 
-              <div>
-                <p
-                  htmlFor=""
-                  className="text-[#fff] text-[18px] font-normal font-inter"
-                >
-                  Company Name*
-                </p>
-                <input
-                  placeholder="Company Name"
-                  name="companyname"
-                  className=" input  hover:input-[#fff] rounded-none m-[0px]  w-full mt-2 border-b-[#ebebeb] border-t-transparent   border-r-transparent  border-l-transparent  bg-transparent focus:outline-none focus:ring-0 p-2 text-[#cdcdcd] text-[14px] font-[350]"
-                  {...register("companyname", { required: true })}
-                />
-                <p className="label-text-alt text-[#fff] mt-3">
-                  {errors.companyname?.message}
-                </p>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 grid-cols-1 gap-4  mt-4">
+             
               <div>
                 <p
                   htmlFor=""
@@ -165,14 +172,87 @@ export default function BookingModal({ setBookModal, selectedIdxe }) {
                 <input
                   type="text"
                   placeholder="Full Name"
-                  name="personname"
+                  name="name"
                   className=" input  hover:input-[#fff] rounded-none m-[0px]  w-full mt-2 border-b-[#ebebeb] border-t-transparent   border-r-transparent  border-l-transparent  bg-transparent focus:outline-none focus:ring-0 p-2 text-[#cdcdcd] text-[14px] font-[350]"
-                  {...register("personname", { required: true })}
+                  {...register("name", { required: true })}
                 />
-                <p className="label-text-alt text-[#fff] mt-3">
-                  {errors.personname?.message}
-                </p>
+                {/* <p className="label-text-alt text-[#fff] mt-3">
+                  {errors.name?.message}
+                </p> */}
               </div>
+
+
+            </div>
+
+            <div className="grid md:grid-cols-2 grid-cols-1 gap-4  mt-4">
+             
+
+              
+              <div>
+                <p
+                  htmlFor=""
+                  className="text-[#fff] text-[18px] font-normal font-inter"
+                >
+                  Email Address*
+                </p>
+                <input
+                  type="email"
+                  placeholder="Email Address"
+                  name="email"
+                  className=" input  hover:input-[#fff] rounded-none m-[0px]  w-full mt-2 border-b-[#ebebeb] border-t-transparent   border-r-transparent  border-l-transparent  bg-transparent focus:outline-none focus:ring-0 p-2 text-[#cdcdcd] text-[14px] font-[350]"
+                  {...register("email", { required: true })}
+                />
+                {/* <p className="label-text-alt text-[#fff] mt-3">
+                  {errors.email?.message}
+                </p> */}
+              </div>
+
+
+          
+              <div>
+                <p
+                  htmlFor=""
+                  className="text-[#fff] text-[18px] font-normal font-inter"
+                >
+                  Company Name*
+                </p>
+                <input
+                  placeholder="Company Name"
+                  name="company_name"
+                  className=" input  hover:input-[#fff] rounded-none m-[0px]  w-full mt-2 border-b-[#ebebeb] border-t-transparent   border-r-transparent  border-l-transparent  bg-transparent focus:outline-none focus:ring-0 p-2 text-[#cdcdcd] text-[14px] font-[350]"
+                  {...register("company_name", { required: true })}
+                />
+                {/* <p className="label-text-alt text-[#fff] mt-3">
+                  {errors.companyname?.message}
+                </p> */}
+              </div>
+
+
+
+
+            </div>
+            <div className="grid md:grid-cols-2 grid-cols-1 gap-4  mt-4">
+            
+            <div>
+                <p
+                  htmlFor=""
+                  className="text-[#fff] text-[18px] font-normal font-inter"
+                >
+                  Department Name*
+                </p>
+                <textarea
+                  type="text"
+                  placeholder="Department Names"
+                  name="dept_name"
+                  className=" input  hover:input-[#fff] rounded-none m-[0px]  w-full mt-2 border-b-[#ebebeb] border-t-transparent   border-r-transparent  border-l-transparent  bg-transparent focus:outline-none focus:ring-0 p-2 text-[#cdcdcd] text-[14px] font-[350]"
+                  {...register("dept_name", { required: true })}
+                />
+                {/* <p className="label-text-alt text-[#fff] mt-3">
+                  {errors.address?.message}
+                </p> */}
+              </div>
+
+
 
               <div>
                 <p
@@ -184,8 +264,8 @@ export default function BookingModal({ setBookModal, selectedIdxe }) {
                 <div>
                   <select
                     className=" input  hover:input-[#fff] rounded-none m-[0px]  w-full mt-2 border-b-[#ebebeb] border-t-transparent   border-r-transparent  border-l-transparent  bg-transparent focus:outline-none focus:ring-0 p-2 text-[#cdcdcd] text-[14px] font-[350]"
-                    name="designation"
-                    {...register("designation", { required: true })}
+                    name="desg_name"
+                    {...register("desg_name", { required: true })}
                   >
                     <option
                       value=""
@@ -258,45 +338,11 @@ export default function BookingModal({ setBookModal, selectedIdxe }) {
                   {errors.designation?.message}
                 </p>
               </div>
-            </div>
-            <div className="grid md:grid-cols-2 grid-cols-1 gap-4  mt-4">
-              <div>
-                <p
-                  htmlFor=""
-                  className="text-[#fff] text-[18px] font-normal font-inter"
-                >
-                  Email Address*
-                </p>
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  name="email"
-                  className=" input  hover:input-[#fff] rounded-none m-[0px]  w-full mt-2 border-b-[#ebebeb] border-t-transparent   border-r-transparent  border-l-transparent  bg-transparent focus:outline-none focus:ring-0 p-2 text-[#cdcdcd] text-[14px] font-[350]"
-                  {...register("email", { required: true })}
-                />
-                <p className="label-text-alt text-[#fff] mt-3">
-                  {errors.email?.message}
-                </p>
-              </div>
 
-              <div>
-                <p
-                  htmlFor=""
-                  className="text-[#fff] text-[18px] font-normal font-inter"
-                >
-                  Billing Address*
-                </p>
-                <textarea
-                  type="text"
-                  placeholder="Billing Address"
-                  name="address"
-                  className=" input  hover:input-[#fff] rounded-none m-[0px]  w-full mt-2 border-b-[#ebebeb] border-t-transparent   border-r-transparent  border-l-transparent  bg-transparent focus:outline-none focus:ring-0 p-2 text-[#cdcdcd] text-[14px] font-[350]"
-                  {...register("address", { required: true })}
-                />
-                <p className="label-text-alt text-[#fff] mt-3">
-                  {errors.address?.message}
-                </p>
-              </div>
+
+
+
+             
             </div>
 
             <div className="grid md:grid-cols-2 grid-cols-1 gap-4  mt-4"></div>

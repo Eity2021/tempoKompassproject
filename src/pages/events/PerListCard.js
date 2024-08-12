@@ -25,7 +25,7 @@ export default function PerListCard({ eventPerList }) {
     evntcode,
     idxe,
   } = eventPerList;
-console.log(idxe)
+
   const handleViewEvent = () => {
     setSelectedView(evntcode);
     navigate("/events-view");
