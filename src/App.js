@@ -3,7 +3,7 @@ import AppRoutes from "./routes/AppRoutes"; // Correct import
 import Layout from "./components/layout/Layout"; // Correct import
 import Loader from "./components/loader/Loader"; // Correct import
 import { PricingProvider } from "./components/contextProvider/PricingProvider"; // Correct import
-import './app.css';
+import './App.css';
 
 function App() {
   const [loading, setLoading] = useState(false);

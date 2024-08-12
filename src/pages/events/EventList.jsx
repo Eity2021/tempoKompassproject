@@ -3,15 +3,7 @@ import Search from './Search'
 import ListCard from './ListCard'
 
 export default function EventList() {
-
-
   const [eventList,setEventList] = useState([]);
-
-
-
- console.log(eventList);
-// console.log(eventView);
-
 useEffect(() => {
   const controller = new AbortController();
   const { signal } = controller;
@@ -23,9 +15,9 @@ useEffect(() => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      console.log(data); // Log the entire response data
+
       setEventList(data.data); // Make sure this is the correct path
-      console.log(data.data); // Log the data that you're setting in state
+
     } catch (error) {
       if (error.name === "AbortError") {
         console.log("Request cancelled");

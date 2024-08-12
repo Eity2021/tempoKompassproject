@@ -28,9 +28,11 @@ import React, {
     const [modalVisible, setModalVisible] = useState(false);
     const [customizeModal, setCustomizeModal] = useState(true);
     const [isOpen, setIsOpen] = useState(false);
-    const [loading, setLoading] = useState(false);
+
     const[selectedView,setSelectedView] = useState('');
     const [eventView,setEventView] = useState([])
+    const [selectedIdxe,setSelectedIdxe] = useState(null)
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const toggleDrawer = () => {
       setIsOpen(!isOpen);
     };
@@ -77,6 +79,19 @@ import React, {
         });
       return () => controller.abort();
     }, []);
+
+const [phoneNumber,setPhoneNumber] = useState('')
+const [phoneCode,setPhoneCode] = useState('88')
+
+const  PhoneHandle = (e) => {
+  setPhoneNumber(e.target.value)
+}
+const  phoneCodeHandle = (e) => {
+  setPhoneCode(e.target.value)
+}
+
+
+
 
  
     return (
@@ -125,6 +140,12 @@ import React, {
           toggleDrawer,
           selectedView,setSelectedView,
           eventView,setEventView,
+          selectedIdxe,setSelectedIdxe,
+          isModalOpen, setIsModalOpen,
+          phoneNumber,setPhoneNumber,
+          phoneCode,setPhoneCode,
+          PhoneHandle,
+          phoneCodeHandle
         }}
       >
         {children}

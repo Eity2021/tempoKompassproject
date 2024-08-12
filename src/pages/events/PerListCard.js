@@ -3,15 +3,29 @@ import BookingModal from "./BookNow/BookingModal";
 import parse from "html-react-parser";
 import { useNavigate } from "react-router-dom";
 import { useContextProvider } from "../../components/contextProvider/PricingProvider";
+import DynamicButton from "../button/DynamicButton";
 
 export default function PerListCard({ eventPerList }) {
   const navigate = useNavigate();
-  const { setSelectedView } = useContextProvider();
+  const {
+    setSelectedView,
+    setSelectedIdxe,
+    selectedIdxe,
+    isModalOpen,
+    setIsModalOpen,
+  } = useContextProvider();
 
-  const [bookModal, setBookModal] = useState(true);
-  const { evntfeests, evntname, details, date, starttime, endtime, evntcode } =
-    eventPerList;
-
+  const {
+    evntfeests,
+    evntname,
+    details,
+    date,
+    starttime,
+    endtime,
+    evntcode,
+    idxe,
+  } = eventPerList;
+console.log(idxe)
   const handleViewEvent = () => {
     setSelectedView(evntcode);
     navigate("/events-view");
@@ -35,6 +49,11 @@ export default function PerListCard({ eventPerList }) {
     Dec: "December",
   };
   const month = monthMapping[abbreviatedMonth];
+
+  const handleBookNow = () => {
+    setSelectedIdxe(idxe);
+    setIsModalOpen(true);
+  };
 
   return (
     <div>
@@ -84,18 +103,11 @@ export default function PerListCard({ eventPerList }) {
                 evntfeests === "paid" ||
                 evntfeests === "PAID" ? (
                   <div className="flex justify-center mt-[30px]">
-                    <div className="bg-[#21383E] py-[12px] px-[16px]">
-                      <button className="font-poppins text-[16px] text-[#fff] font-medium text-center">
-                        <label
-                          htmlFor="my-modal"
-                          className="font-poppins text-[16px] text-[#fff] font-medium text-center"
-                        >
-                          <span className="text-[16px] font-medium font-poppins ">
-                            Book Now
-                          </span>
-                        </label>
-                      </button>
-                    </div>
+                    <DynamicButton
+                      label="Book now"
+                      onClick={handleBookNow}
+                      className="w-[220px]"
+                    ></DynamicButton>
                   </div>
                 ) : (
                   <></>
@@ -108,7 +120,12 @@ export default function PerListCard({ eventPerList }) {
 
       {
         <div>
-          {bookModal ? <BookingModal setBookModal={setBookModal} /> : null}
+          {isModalOpen ? (
+            <BookingModal
+              setIsModalOpen={setIsModalOpen}
+              selectedIdxe={selectedIdxe}
+            />
+          ) : null}
         </div>
       }
     </div>

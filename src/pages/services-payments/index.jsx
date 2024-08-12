@@ -1,69 +1,84 @@
 import React, { useState, useEffect } from "react";
 import { useContextProvider } from "../../components/contextProvider/PricingProvider";
 import { Link } from "react-router-dom";
-import Lottie from "lottie-react";
-import Failed from "../../Failed.json";
 import paymentSuccessful from "../../assets/Nimages/paymentSuccessful.png";
+import paymentFailed from "../../assets/Nimages/paymentFailed.png";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
 export default function ServicesPayments() {
-  const [ecode, setEcode] = useState(null);
-  const [sts, setSts] = useState(null);
-  const [msg, setMsg] = useState(null);
+  const { setCart } = useContextProvider();
   const [odrx, setOdrx] = useState(null);
   const [typr, setTypr] = useState(null);
-  // console.log(odrx)
-  const { setCart } = useContextProvider();
+  const [code, setCode] = useState(null);
+  const [status, setStatus] = useState(null);
+  const [message, setMessage] = useState(null);
+  const [pdfUrl, setPdfUrl] = useState(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-
-    const ecode = params.get("code");
-    const sts = params.get("status");
-    const msg = params.get("message");
     const odrx = params.get("odrx");
-    const typr = params.get("typr");
+    const typr = params.get("odrxtyp");
+    const code = params.get("code");
+    const status = params.get("status");
+    const message = params.get("message");
 
-    setEcode(ecode);
-    setSts(sts);
-    setMsg(msg);
+    setOdrx(odrx);
+    setTypr(typr);
+    setCode(code);
+    setStatus(status);
+    setMessage(message);
 
     if (odrx && typr) {
-      setOdrx(odrx);
-      setTypr(typr);
       sessionStorage.setItem("odrx", odrx);
       sessionStorage.setItem("typr", typr);
+      sessionStorage.setItem("code", code);
+      sessionStorage.setItem("status", status);
+      sessionStorage.setItem("message", message);
     }
-  }, []);
+  }, [odrx, typr]);
 
   useEffect(() => {
     const odrx = sessionStorage.getItem("odrx");
     const typr = sessionStorage.getItem("typr");
 
-    if (odrx && typr) {
-      const controller = new AbortController();
-      const { signal } = controller;
+      const fetchPDF = async () => {
+        try {
+          const response = await fetch(
+            `https://api.hellokompass.com/pdfinvoice?ordrx=${odrx}&typr=${typr}`,
+            {
+              method: "GET",
+              headers: {
+                Accept: "application/pdf",
+                // other headers if needed
+              },
+            }
+          );
 
-      fetch(
-        `https://api.hellokompass.com/pdfinvoice?ordrx=${odrx}&typr=${typr}`,
-        {
-          // order_id
-          signal,
+          if (!response.ok) {
+            throw new Error("Network response was not ok.");
+          }
+
+          const blob = await response.blob();
+          return URL.createObjectURL(blob);
+        } catch (error) {
+          console.error("Error fetching PDF:", error);
         }
-      )
-        .then((res) => res.json())
-        .then((res) => {
-          setOdrx(res.data);
-        });
+      };
 
-      return () => controller.abort();
-    }
+      const getPDF = async () => {
+        const url = await fetchPDF();
+        setPdfUrl(url);
+      };
+
+      getPDF();
+    
   }, []);
+
   return (
-    <div>
+    <div className="h-full">
       {(() => {
-        if (ecode === 200) {
+        if ((code === '200') ) {
           localStorage.removeItem("cart");
           setCart([]);
           return (
@@ -81,9 +96,11 @@ export default function ServicesPayments() {
                       </div>
                     </div>
                     <h2 className="text-5xl font-bold text-primary mb-2">
-                      {sts} !
+                      {status} !
                     </h2>
-                    <h2 className="mb-6 text-[1rem] text-[#757575]">{msg}</h2>
+                    <h2 className="mb-6 text-[1rem] text-[#757575]">
+                      {message}
+                    </h2>
                     <div>
                       <Link to="/">
                         <button className="btn bg-[#0C1E21]  font-poppins text-white font-regular text-[14px]">
@@ -95,12 +112,26 @@ export default function ServicesPayments() {
                 </div>
 
                 <div className="mx-4">
-                  {/* <Invoice odrx={odrx}></Invoice> */}
+                  <div>
+                    {pdfUrl ? (
+                      <iframe
+                        src={pdfUrl}
+                        width="100%"
+                        height="1100px"
+                        title="PDF Viewer"
+                        style={{ border: "none", paddingTop: "90px" }}
+                      />
+                    ) : (
+                      <div className="pt-[99px]">
+                        <p>Loading PDF...</p>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
           );
-        } else if (ecode === 400) {
+        } else if (code === "400") {
           localStorage.removeItem("cart");
           setCart([]);
           return (
@@ -108,14 +139,14 @@ export default function ServicesPayments() {
               <div className="text-center">
                 <div className="flex justify-center">
                   <div className="w-[15rem] ">
-                    <Lottie animationData={Failed} />
+                    <LazyLoadImage src={paymentFailed} alt="failed" />
                   </div>
                 </div>
 
                 <h2 className="2xl:text-5xl  text-4xl font-bold text-[#FF0000] mb-2">
-                  {sts}
+                  {status}
                 </h2>
-                <h2 className="mb-6 text-[1rem] text-[#757575]">{msg}</h2>
+                <h2 className="mb-6 text-[1rem] text-[#757575]">{message}</h2>
                 <div>
                   <Link to="/">
                     <button className="btn bg-[#0C1E21]  font-poppins text-white font-regular text-[14px]">
@@ -126,7 +157,7 @@ export default function ServicesPayments() {
               </div>
             </div>
           );
-        } else if (ecode === 401) {
+        } else if (code === "401") {
           localStorage.removeItem("cart");
           setCart([]);
           return (
@@ -134,14 +165,14 @@ export default function ServicesPayments() {
               <div className="text-center">
                 <div className="flex justify-center">
                   <div className="w-[15rem] ">
-                    <Lottie animationData={Failed} />
+                    <LazyLoadImage src={paymentFailed} alt="failed" />
                   </div>
                 </div>
 
                 <h2 className="2xl:text-5xl  text-4xl font-bold text-[#FF0000] mb-2">
-                  {sts}
+                  {status}
                 </h2>
-                <h2 className="mb-6 text-[1rem] text-[#757575]">{msg}</h2>
+                <h2 className="mb-6 text-[1rem] text-[#757575]">{message}</h2>
                 <div>
                   <Link to="/">
                     <button className="btn bg-[#0C1E21]  font-poppins text-white font-regular text-[14px]">
