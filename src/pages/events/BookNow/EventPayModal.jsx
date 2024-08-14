@@ -7,7 +7,8 @@ import { useForm } from "react-hook-form";
 export default function EventPayModal() {
   const { isEventModalOpen, setIsEventModalOpen,location} = useContextProvider();
 
-  const{eventOrder,setEventOrder} = useState({});
+  const[eventOrder,setEventOrder] = useState('');
+
 useEffect(() => {
   console.log("setEventOrder function:", setEventOrder);
   const storedOrder = JSON.parse(localStorage.getItem("eventOrderInfo")) || {};
