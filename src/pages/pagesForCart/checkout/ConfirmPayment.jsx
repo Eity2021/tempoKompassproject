@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, {useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useContextProvider } from "../../../components/contextProvider/PricingProvider";
@@ -17,7 +17,6 @@ import {
 import "react-lazy-load-image-component/src/effects/blur.css";
 import ProductCalculation from "./ProductCalculation";
 import ChevronRight from "../../../components/svg/store/ChevronRight";
-import Invoice from "../invoice/Invoice";
 export default function ConfirmPayment({ onButtonClick }) {
   const [selected] = useState(new Date());
   const {
@@ -25,11 +24,11 @@ export default function ConfirmPayment({ onButtonClick }) {
     setUserData,
     order,
     cart,
-    ConfirmModalVisible,
     setPage,
     location,
     promoCode,
     pCode,
+
   } = useContextProvider();
 
   let mainVat;
@@ -100,16 +99,27 @@ export default function ConfirmPayment({ onButtonClick }) {
   const onSubmit = (data) => {
     setUserData({ ...userData, ...data });
     axios
-      .post("https://epay.hellokompass.com/quicksend-paymentinfo", data)
-      .then((res) => {
-        if (res.data.status === "SUCCESS" || res.data.status === "success" || res.data.status === "Success" ) {
-          window.open(res.data.data, "_self");
-        } else if (res.data.code === 400) {
-          swal(res.data.message);
-          navigate(setPage("checkout"));
-        }
-      });
-  };
+    .post("https://epay.hellokompass.com/quicksend-paymentinfo", data)
+    .then((res) => {
+      if (res.data.status === "SUCCESS" || res.data.status === "success" || res.data.status === "Success" ) {
+        window.open(res.data.data, "_self");
+      } else if (res.data.code === 400) {
+        swal(res.data.message);
+        navigate(setPage("checkout"));
+      }
+    });
+  
+}
+
+
+
+
+
+
+
+
+
+
 
   return (
     <div className="container pb-[60px]">
@@ -347,7 +357,7 @@ export default function ConfirmPayment({ onButtonClick }) {
               Pay Now
             </button>
           </div>
-          {ConfirmModalVisible ? <Invoice /> : ""}
+       
         </form>
       </div>
     </div>

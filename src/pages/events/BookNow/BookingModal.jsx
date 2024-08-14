@@ -5,7 +5,8 @@ import Close from "../../../components/svg/store/Close";
 import WhiteArrow from "../../../components/svg/store/WhiteArrow";
 import { useContextProvider } from "../../../components/contextProvider/PricingProvider";
 import axios from "axios";
-
+import { toast } from "react-toastify";
+import EventPayModal from "./EventPayModal";
 export default function BookingModal({ setBookModal, selectedIdxe }) {
   const [checkNumber, setCheckNumber] = useState([]);
 
@@ -16,15 +17,24 @@ export default function BookingModal({ setBookModal, selectedIdxe }) {
     phoneCodeHandle,
     phoneCode,
     phoneNumber,
+    setIsEventModalOpen,
+    isEventModalOpen
   } = useContextProvider();
 
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
+  const handlePayNow = () => {
+    setIsEventModalOpen(true);
+  };
+
+
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   // {
@@ -32,7 +42,11 @@ export default function BookingModal({ setBookModal, selectedIdxe }) {
   // }
 
   useEffect(() => {
-    if ((phoneNumber.length === 10 || phoneNumber.length === 11) && phoneCode && selectedIdxe) {
+    if (
+      (phoneNumber.length === 10 || phoneNumber.length === 11) &&
+      phoneCode &&
+      selectedIdxe
+    ) {
       const controller = new AbortController();
       const { signal } = controller;
 
@@ -56,44 +70,39 @@ export default function BookingModal({ setBookModal, selectedIdxe }) {
     }
   }, [phoneCode, phoneNumber, selectedIdxe]);
 
-
   const onSubmit = (data) => {
-  
+    console.log(data);
 
     if (checkNumber && checkNumber.code === 200) {
-      axios.post("https://api.hellokompass.com/event/eventreg", data)
+      axios
+        .post("https://api.hellokompass.com/event/eventreg", data)
         .then((res) => {
           if (res.data.code === 200) {
-            // Handle success
-            console.log(res.data);
-            
+            localStorage.setItem("eventOrderInfo", JSON.stringify(res.data));
             // toast.success(res.data.message);
-            // setTrailModal(false);
-            // reset();
+            handlePayNow()
+            reset();
+
+     
           } else {
-            // Handle failure
-            console.log(res.data.message);
-            // toast.error(res.data.message);
+            toast.error(res.data.message);
           }
         })
         .catch((error) => {
           console.error("Error:", error.message);
-          // Handle error
-          // toast.error("An error occurred during submission");
+
+          toast.error("An error occurred during submission");
         });
     } else if (checkNumber && checkNumber.code === 400) {
-      // Handle case when checkNumber is 400
       console.log("Check number is 400");
-      // You can add some logic or display an error message
     } else {
-      // Handle any other case if necessary
       console.log("Unexpected check number value");
     }
   };
-  
 
   return (
-    <div className="" isOpen={isModalOpen}>
+<>
+<div className="" isOpen={isModalOpen}>
       <div className="fixed inset-0 flex items-center justify-center z-[100]	 bg-black bg-opacity-50 ">
         <div className=" w-11/12 max-w-5xl bg-[#076f74] rounded-none py-[35px] px-[80px]  shadow-lg  md:w-1/2  g:w-1/3 p-6 relative ">
           <div className="flex justify-end">
@@ -130,17 +139,7 @@ export default function BookingModal({ setBookModal, selectedIdxe }) {
                       value={`Bangladesh(${phoneCode})`}
                       onChange={phoneCodeHandle}
                     >
-                      {/* {pCode?.map((code) => (
-                        <>
-                          <option
-                            className="text-[#686868]"
-                            value={code.pcode}
-                            key={code.id}
-                          >
-                            {code.name}({code.pcode})
-                          </option>
-                        </>
-                      ))} */}
+                     
                     </input>
                   </div>
 
@@ -153,7 +152,7 @@ export default function BookingModal({ setBookModal, selectedIdxe }) {
                       {...register("phone", { required: true })}
                       onChange={PhoneHandle}
                     />
-                  
+
                     <small className="text-[12px] text-[#fff] mt-3">
                       {checkNumber.message}
                     </small>
@@ -161,7 +160,6 @@ export default function BookingModal({ setBookModal, selectedIdxe }) {
                 </div>
               </div>
 
-             
               <div>
                 <p
                   htmlFor=""
@@ -180,14 +178,9 @@ export default function BookingModal({ setBookModal, selectedIdxe }) {
                   {errors.name?.message}
                 </p> */}
               </div>
-
-
             </div>
 
             <div className="grid md:grid-cols-2 grid-cols-1 gap-4  mt-4">
-             
-
-              
               <div>
                 <p
                   htmlFor=""
@@ -207,8 +200,6 @@ export default function BookingModal({ setBookModal, selectedIdxe }) {
                 </p> */}
               </div>
 
-
-          
               <div>
                 <p
                   htmlFor=""
@@ -226,14 +217,9 @@ export default function BookingModal({ setBookModal, selectedIdxe }) {
                   {errors.companyname?.message}
                 </p> */}
               </div>
-
-
-
-
             </div>
             <div className="grid md:grid-cols-2 grid-cols-1 gap-4  mt-4">
-            
-            <div>
+              <div>
                 <p
                   htmlFor=""
                   className="text-[#fff] text-[18px] font-normal font-inter"
@@ -251,8 +237,6 @@ export default function BookingModal({ setBookModal, selectedIdxe }) {
                   {errors.address?.message}
                 </p> */}
               </div>
-
-
 
               <div>
                 <p
@@ -339,10 +323,19 @@ export default function BookingModal({ setBookModal, selectedIdxe }) {
                 </p>
               </div>
 
-
-
-
-             
+              <div>
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  name="event_id"
+                  className=" input  hover:input-[#fff] rounded-none m-[0px]  w-full mt-2 border-b-[#ebebeb] border-t-transparent   border-r-transparent  border-l-transparent  bg-transparent focus:outline-none focus:ring-0 p-2 text-[#cdcdcd] text-[14px] font-[350]"
+                  {...register("event_id", { required: true })}
+                  value={selectedIdxe}
+                />
+                {/* <p className="label-text-alt text-[#fff] mt-3">
+                  {errors.name?.message}
+                </p> */}
+              </div>
             </div>
 
             <div className="grid md:grid-cols-2 grid-cols-1 gap-4  mt-4"></div>
@@ -363,6 +356,20 @@ export default function BookingModal({ setBookModal, selectedIdxe }) {
           </form>
         </div>
       </div>
+     
     </div>
+    
+    {
+        <div>
+          {isEventModalOpen ? (
+            <EventPayModal
+              setIsEventModalOpen={setIsEventModalOpen}
+         
+            />
+          ) : null}
+        </div>
+      }
+      
+      </>
   );
 }
