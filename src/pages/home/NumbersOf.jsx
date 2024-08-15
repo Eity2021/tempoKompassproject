@@ -25,7 +25,7 @@ export default function NumbersOf({ ...rest }) {
         setCounterNumber(data.data);
       } catch (error) {
         if (error.name === "AbortError") {
-          console.log("Request cancelled");
+        <></>
         } else {
           console.error("Fetch error:", error);
         }

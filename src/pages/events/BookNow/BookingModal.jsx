@@ -71,8 +71,6 @@ export default function BookingModal({selectedIdxe }) {
   }, [phoneCode, phoneNumber, selectedIdxe]);
 
   const onSubmit = (data) => {
-    console.log(data);
-
     if (checkNumber && checkNumber.code === 200) {
       axios
         .post("https://api.hellokompass.com/event/eventreg", data)
@@ -94,9 +92,9 @@ export default function BookingModal({selectedIdxe }) {
           toast.error("An error occurred during submission");
         });
     } else if (checkNumber && checkNumber.code === 400) {
-      console.log("Check number is 400");
+     <></>
     } else {
-      console.log("Unexpected check number value");
+   <></>
     }
   };
 

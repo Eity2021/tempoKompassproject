@@ -20,7 +20,7 @@ useEffect(() => {
 
     } catch (error) {
       if (error.name === "AbortError") {
-        console.log("Request cancelled");
+      <></>
       } else {
         console.error("Fetch error:", error);
       }

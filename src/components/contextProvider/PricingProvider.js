@@ -51,11 +51,11 @@ export const PricingProvider = ({ children }) => {
       .then((res) => res.json())
       .then((data) => {
         setLocation(data);
-        // console.log(data);
+    
       })
       .catch((error) => {
         if (error.name === "AbortError") {
-          // console.log("request cancelled");
+         <></>
         }
       });
     return () => controller.abort();

@@ -12,14 +12,14 @@ export default function EventPayModal() {
   const [eventOrder, setEventOrder] = useState("");
 
   useEffect(() => {
-    console.log("setEventOrder function:", setEventOrder);
+   
     const storedOrder =
       JSON.parse(localStorage.getItem("eventOrderInfo")) || {};
-    console.log(storedOrder);
+
     setEventOrder(storedOrder.data);
   }, [setEventOrder]);
 
-  console.log(eventOrder);
+
 
   const closeModal = () => {
     setIsEventModalOpen(false);
@@ -32,7 +32,7 @@ export default function EventPayModal() {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+ 
     axios
       .post("https://epay.hellokompass.com/quicksend-paymentinfo", data)
       .then((res) => {

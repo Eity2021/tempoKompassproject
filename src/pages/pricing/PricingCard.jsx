@@ -67,7 +67,7 @@ export default function PricingCard({
   let usdYearlyMainPrice = getUsdDiscountedPrice(dxinfo);
 
   let perUserBamt = getPerUserPriceBdt(dxinfo);
-  // console.log(perUserBamt);
+
   let perUserUamt = getPerUserPriceUsd(dxinfo);
 
   let perYearBamt = bdtYearlyMainPrice / 12;
@@ -76,7 +76,7 @@ export default function PricingCard({
   let perYearUamt = usdYearlyMainPrice / 12;
   let perYearUserUamt = perYearUamt / dxinfo?.maxuser;
 
-  //console.log(perUserBamt);
+
 
   const handleAddToCart = () => {
     const newCart = cart ? [...cart] : [];

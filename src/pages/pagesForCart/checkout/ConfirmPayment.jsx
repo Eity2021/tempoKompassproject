@@ -52,7 +52,7 @@ export default function ConfirmPayment({ onButtonClick }) {
     if (product.isYearly) {
       subTotalBdt += getBdtDiscountedPrice(product.dxinfo);
       subTotalMainBdt = subTotalBdt.toFixed(2);
-      console.log(subTotalBdt);
+
       netBdt = parseFloat(
         subTotalMainBdt - parseFloat(promoCode.promo_amount || 0)
       );
@@ -60,7 +60,7 @@ export default function ConfirmPayment({ onButtonClick }) {
       totalBdt = parseFloat(netBdt + parseFloat(bdtTax));
     } else subTotalBdt += parseFloat(product.dxinfo.vubdt);
     subTotalMainBdt = subTotalBdt.toFixed(2);
-    //console.log(subTotalMainBdt)
+
     netBdt = parseFloat(
       subTotalMainBdt - parseFloat(promoCode.promo_amount || 0)
     );

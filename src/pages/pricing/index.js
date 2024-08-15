@@ -37,8 +37,8 @@ export default function Pricing() {
         setPayrollPrice(data.allproduct.PSEARCH);
       })
       .catch((error) => {
-        if (error.name == "AbortError") {
-          // console.log("request cancelled");
+        if (error.name === "AbortError") {
+        <></>
         }
       });
     return () => controller.abort();

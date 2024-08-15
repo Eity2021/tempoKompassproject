@@ -42,7 +42,7 @@ export default function DetailsViewPage() {
       .then((data) => setEventView(data.data))
       .catch((error) => {
         if (error.name === "AbortError") {
-          // console.log("request cancelled");
+        <></>
         }
       });
     return () => controller.abort();
@@ -54,11 +54,16 @@ export default function DetailsViewPage() {
   };
   return (
     <div className="mt-[90px]">
-      <div>
-        <img src={evntbanner} alt="" className="h-[600px] w-[100%]" />
-      </div>
+      {
+        evntbanner && (
+          <div>
+          <img src={evntbanner} alt="" className="h-[600px] w-[100%]" />
+        </div>
+        )
+      }
+     
       <div className="container">
-        <div className=" mt-[30px]  mb-[30px]">
+        <div className=" mt-[100px]  mb-[30px] ">
           <div className="flex justify-between">
             <p className="font-poppins text-[30px] text-[#21383E] font-bold">
               {evntname}
