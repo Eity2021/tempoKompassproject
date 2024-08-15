@@ -9,6 +9,7 @@ const billingPerson = yup.string().required("Billing Person Name is  required");
 const fullName = yup.string().required("Full Name is  required");
 const employee = yup.string().required("Minimum number is 0");
 const option = yup.string().required("Choose One");
+const departmentValidation = yup.string().required("Department is required");
 // single chdeckbox
 const checkbox = yup
   .boolean()
@@ -53,6 +54,17 @@ export const customize = yup.object().shape({
   no_emp:employee,
   industry_typ:option,
   req_packages:checkboxes,
+
+
+});
+export const eventPay = yup.object().shape({
+  name: fullName,
+  // phone: phoneValidation,
+  email: emailValidation,
+  company_name: companyValidation,
+  dept_name: departmentValidation,
+  desg_name:designationValidation,
+
 
 
 });

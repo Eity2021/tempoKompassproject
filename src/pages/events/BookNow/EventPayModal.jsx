@@ -64,9 +64,7 @@ export default function EventPayModal() {
             <h1 className="text-[22px] font-medium font-mixed text-[#0c1e21] font-poppins">
               Kindly ensure that your registration payment is completed.
             </h1>
-            {/* <p className="text-[20px] font-normal font-poppins text-[#0c1e21]">
-              Fill out your details to get a live demo of Campaign Monitor:
-            </p> */}
+           
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)}>

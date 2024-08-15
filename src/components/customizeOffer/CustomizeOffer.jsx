@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import Close from "../../components/svg/store/Close";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { customize } from "../..//components/Validation/YupValidation";
+import { customize } from "../../components/Validation/YupValidation";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -26,7 +26,7 @@ export default function CustomizeOffer({ setCustomizeModal }) {
 
   const onSubmit = (data) => {
     axios.post("https://api.hellokompass.com/customreq", data).then((res) => {
-      if (res.data.code == 200) {
+      if (res.data.code === 200) {
         setCustomizeOffer(res.data);
         toast.success(res.data.message);
         setCustomizeModal(false);

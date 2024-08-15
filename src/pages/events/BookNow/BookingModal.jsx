@@ -7,6 +7,7 @@ import { useContextProvider } from "../../../components/contextProvider/PricingP
 import axios from "axios";
 import { toast } from "react-toastify";
 import EventPayModal from "./EventPayModal";
+import { eventPay } from "../../../components/Validation/YupValidation";
 export default function BookingModal({selectedIdxe }) {
   const [checkNumber, setCheckNumber] = useState([]);
 
@@ -36,7 +37,9 @@ export default function BookingModal({selectedIdxe }) {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(eventPay),
+  });
   // {
   //   resolver: yupResolver(),
   // }
@@ -172,9 +175,9 @@ export default function BookingModal({selectedIdxe }) {
                   className=" input  hover:input-[#fff] rounded-none m-[0px]  w-full mt-2 border-b-[#ebebeb] border-t-transparent   border-r-transparent  border-l-transparent  bg-transparent focus:outline-none focus:ring-0 p-2 text-[#cdcdcd] text-[14px] font-[350]"
                   {...register("name", { required: true })}
                 />
-                {/* <p className="label-text-alt text-[#fff] mt-3">
+                <p className="label-text-alt text-[#fff] mt-3">
                   {errors.name?.message}
-                </p> */}
+                </p>
               </div>
             </div>
 
@@ -193,9 +196,9 @@ export default function BookingModal({selectedIdxe }) {
                   className=" input  hover:input-[#fff] rounded-none m-[0px]  w-full mt-2 border-b-[#ebebeb] border-t-transparent   border-r-transparent  border-l-transparent  bg-transparent focus:outline-none focus:ring-0 p-2 text-[#cdcdcd] text-[14px] font-[350]"
                   {...register("email", { required: true })}
                 />
-                {/* <p className="label-text-alt text-[#fff] mt-3">
+                <p className="label-text-alt text-[#fff] mt-3">
                   {errors.email?.message}
-                </p> */}
+                </p>
               </div>
 
               <div>
@@ -211,9 +214,9 @@ export default function BookingModal({selectedIdxe }) {
                   className=" input  hover:input-[#fff] rounded-none m-[0px]  w-full mt-2 border-b-[#ebebeb] border-t-transparent   border-r-transparent  border-l-transparent  bg-transparent focus:outline-none focus:ring-0 p-2 text-[#cdcdcd] text-[14px] font-[350]"
                   {...register("company_name", { required: true })}
                 />
-                {/* <p className="label-text-alt text-[#fff] mt-3">
-                  {errors.companyname?.message}
-                </p> */}
+                <p className="label-text-alt text-[#fff] mt-3">
+                  {errors.company_name?.message}
+                </p>
               </div>
             </div>
             <div className="grid md:grid-cols-2 grid-cols-1 gap-4  mt-4">
@@ -231,9 +234,9 @@ export default function BookingModal({selectedIdxe }) {
                   className=" input  hover:input-[#fff] rounded-none m-[0px]  w-full mt-2 border-b-[#ebebeb] border-t-transparent   border-r-transparent  border-l-transparent  bg-transparent focus:outline-none focus:ring-0 p-2 text-[#cdcdcd] text-[14px] font-[350]"
                   {...register("dept_name", { required: true })}
                 />
-                {/* <p className="label-text-alt text-[#fff] mt-3">
-                  {errors.address?.message}
-                </p> */}
+                <p className="label-text-alt text-[#fff] mt-3">
+                  {errors.dept_name?.message}
+                </p>
               </div>
 
               <div>
@@ -317,7 +320,7 @@ export default function BookingModal({selectedIdxe }) {
                   </select>
                 </div>
                 <p className="label-text-alt text-[#fff] mt-3">
-                  {errors.designation?.message}
+                  {errors.desg_name?.message}
                 </p>
               </div>
 
