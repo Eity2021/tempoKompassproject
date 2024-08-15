@@ -321,7 +321,7 @@ export default function BookingModal({selectedIdxe }) {
                 </p>
               </div>
 
-              <div>
+              <div className="hidden">
                 <input
                   type="text"
                   placeholder="Full Name"
