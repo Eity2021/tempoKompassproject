@@ -7,7 +7,7 @@ import { useContextProvider } from "../../../components/contextProvider/PricingP
 import axios from "axios";
 import { toast } from "react-toastify";
 import EventPayModal from "./EventPayModal";
-export default function BookingModal({ setBookModal, selectedIdxe }) {
+export default function BookingModal({selectedIdxe }) {
   const [checkNumber, setCheckNumber] = useState([]);
 
   const {
@@ -60,9 +60,9 @@ export default function BookingModal({ setBookModal, selectedIdxe }) {
         })
         .catch((error) => {
           if (error.name === "AbortError") {
-            console.log("Request cancelled");
+            <></>
           } else {
-            console.error("Error:", error.message);
+           <></>
           }
         });
 
