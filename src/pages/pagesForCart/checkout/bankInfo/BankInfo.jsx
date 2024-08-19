@@ -1,5 +1,5 @@
 // import { yupResolver } from "@hookform/resolvers/yup";
-import React  from "react";
+import React from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useContextProvider } from "../../../../components/contextProvider/PricingProvider";
@@ -23,8 +23,9 @@ export default function BankInfo({ onButtonClick }) {
     location,
     promoCode,
     pCode,
+    industrys,
   } = useContextProvider();
-
+  console.log(industrys);
   let mainVat;
   let vatValue;
   for (const vat of pCode) {
@@ -63,10 +64,7 @@ export default function BankInfo({ onButtonClick }) {
     netBdt = parseFloat(subTotalBdt - parseFloat(promoCode.promo_amount || 0));
     bdtTax = parseFloat(netBdt * vatValue).toFixed(2);
     totalBdt = parseFloat(netBdt + parseFloat(bdtTax));
-  
-
   }
-
 
   let subTotalUsd = 0;
   let usdTax = 0;
@@ -360,13 +358,49 @@ export default function BankInfo({ onButtonClick }) {
                   htmlFor=""
                   className="text-[#0C1E21] text-[14px] font-regular"
                 >
+                  Industry<span className="text-[#ED1C24]">*</span>
+                </p>
+                <div>
+                  <div>
+                    <select
+                      className=" input  rounded-none m-[0px]  w-full  bg-transparent focus:outline-none focus:ring-0  text-[#a0a2a5]  text-[14px] font-semibold	 placeholder:italic input input-bordered hover:input-primary w-full  mt-1 rounded-none"
+                      name="industry_typ"
+                      {...register("industry_type", { required: true })}
+                    >
+                      <option value="" selected disabled>
+                        Select Industry
+                      </option>
+                      {industrys.map((industry) => (
+                        <>
+                          <option
+                            // className="text-[#686868]"
+                            value=""
+                            key={industry.indid}
+                          >
+                            {industry.ind_name}
+                          </option>
+                        </>
+                      ))}
+                    </select>
+                  </div>
+                  <p className="label-text-alt text-[#fff] mt-3">
+                    {errors.industry_typ?.message}
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 ">
+                <p
+                  htmlFor=""
+                  className="text-[#0C1E21] text-[14px] font-regular"
+                >
                   Address<span className="text-[#ED1C24]">*</span>
                 </p>
                 <input
                   type="text"
                   placeholder="Billing Address"
                   name="address"
-                  className="placeholder:italic input input-bordered hover:input-primary w-full  mr-4 mt-2 rounded-none"
+                  className="placeholder:italic input input-bordered hover:input-primary w-full  mr-4 mt-2 rounded-none "
                   value={userData["address"]}
                   {...register("address", {
                     onChange: (e) =>
@@ -677,7 +711,6 @@ export default function BankInfo({ onButtonClick }) {
                 )}
               </div>
 
-              {/* A checkbox that is used to check if the user has agreed to the terms and conditions.  */}
               <div className="mt-6">
                 <label className="cursor-pointer label justify-start flex">
                   <input
@@ -714,12 +747,6 @@ export default function BankInfo({ onButtonClick }) {
                 </p>
               </div>
               <div className="flex justify-end  mb-[20px]">
-                {/* <button
-              className=" bg-primary border w-28 mt-6 h-10 rounded-[10px] text-white font-semibold text-[.9rem] "
-              onClick={() => onButtonClick("checkout")}
-            >
-              PREVIOUS
-            </button> */}
                 <button
                   type="submit"
                   className=" bg-[#0C1E21]  w-28 mt-6 h-10 rounded-[32px] font-poppins text-white font-regular text-[14px] "

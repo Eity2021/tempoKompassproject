@@ -37,6 +37,9 @@ export const PricingProvider = ({ children }) => {
   const [selectedIdxe, setSelectedIdxe] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
+
+  const [industrys, setIndustrys] = useState([]);
+
   const toggleDrawer = () => {
     setIsOpen(!isOpen);
   };
@@ -61,11 +64,25 @@ export const PricingProvider = ({ children }) => {
     return () => controller.abort();
   }, []);
 
-  // function submitData() {
-  //   setFinalData((finalData) => [...finalData, userData]);
-  //   setUserData("");
-  //   setPage("checkout");
-  // }
+
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
+    fetch("https://api.hellokompass.com/industrylist", { signal })
+      .then((res) => res.json())
+      .then((data) => {
+        setIndustrys(data.data);
+    
+      })
+      .catch((error) => {
+        if (error.name === "AbortError") {
+         <></>
+        }
+      });
+    return () => controller.abort();
+  }, []);
+
 
   useEffect(() => {
     const controller = new AbortController();
@@ -152,7 +169,8 @@ export const PricingProvider = ({ children }) => {
         PhoneHandle,
         phoneCodeHandle,
          eventOrder,setEventOrder,
-         isEventModalOpen, setIsEventModalOpen
+         isEventModalOpen, setIsEventModalOpen,
+         industrys, setIndustrys
       }}
     >
       {children}
