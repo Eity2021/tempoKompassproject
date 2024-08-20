@@ -14,7 +14,7 @@ import { useContextProvider } from "../../components/contextProvider/PricingProv
 export default function TrailModal({ setTrailModal }) {
   const [trail, setTrail] = useState("");
   // const [pCode, setPCode] = useState([]);
-   const {pCode} = useContextProvider();
+   const {pCode,industrys} = useContextProvider();
 
   const {
     register,
@@ -117,7 +117,7 @@ export default function TrailModal({ setTrailModal }) {
                         name="countrycode"
                         {...register("countrycode", { required: true })}
                         className=" input  hover:input-[#fff] rounded-none m-[0px]  w-full mt-2 border-b-[#ebebeb] border-t-transparent   border-r-transparent  border-l-transparent  bg-transparent focus:outline-none focus:ring-0 p-2 text-[#cdcdcd] text-[14px] font-[350]"
-                        defaultValue="88" 
+                       value="88" 
                       >
                         {pCode.map((code) => (
                           <>
@@ -312,54 +312,71 @@ export default function TrailModal({ setTrailModal }) {
                       className=" input  hover:input-[#fff] rounded-none m-[0px]  w-full mt-2 border-b-[#ebebeb] border-t-transparent   border-r-transparent  border-l-transparent  bg-transparent focus:outline-none focus:ring-0 p-2 text-[#cdcdcd] text-[14px] font-[350]"
                       name="companytype"
                       {...register("companytype", { required: true })}
-                    >
-                      <option
-                        value=""
-                        selected
-                        disabled
-                        className="text-[#9CA3AF]"
+                     >
+                         <option
+                           value=""
+                           selected
+                           disabled
+                           className="text-[#9CA3AF]"
                       >
-            Select an industry...
+                        Select Industry
                       </option>
-                     
-                     
-            
-<option className="text-[#686868]"  value="agency">Agency/Consulting</option>
-<option className="text-[#686868]"  value="dev_shop">Application Development Shop</option>
-<option className="text-[#686868]"   value="career">Career/Job Search</option>
-<option className="text-[#686868]"  value="deals">Daily Deals/eCoupons</option>
-<option className="text-[#686868]"  value="dating">Dating Sites</option>
-<option className="text-[#686868]"  value="ecommerce">eCommerce</option>
-<option className="text-[#686868]"  value="education">Education/Training/School/College/University</option>
-<option className="text-[#686868]"  value="entertainment">Entertainment/Events</option>
-<option className="text-[#686868]"  value="finance">Financial Services/Banks/NBFI</option>
-<option className="text-[#686868]"  value="gaming">Gaming</option>
-<option className="text-[#686868]"  value="garments">Garments/Textile</option>
-<option className="text-[#686868]"  value="government">Government</option>
-<option className="text-[#686868]"  value="health">Health/Fitness</option>
-<option className="text-[#686868]"  value="hospital">Hospital/Diagnostic Center</option>
-
-<option className="text-[#686868]"  value="insurance">Insurance</option>
-<option className="text-[#686868]"  value="marketing">Marketing/Advertising</option>
-<option className="text-[#686868]"  value="media">Media/Publishing</option>
-<option className="text-[#686868]"  value="mnc">MNC</option>
-<option className="text-[#686868]"  value="mobile">Mobile App</option>
-<option className="text-[#686868]"  value="politics">Politics/Advocacy</option>
-<option className="text-[#686868]"  value="professional">Professional Services</option>
-<option className="text-[#686868]"  value="real_estate">Real Estate</option>
-<option className="text-[#686868]"  value="religious">Religious/Spiritual</option>
-<option className="text-[#686868]"  value="retail">Retail</option>
-<option className="text-[#686868]"  value="social_media">Social Media/Networking</option>
-<option className="text-[#686868]"  value="tech">Technology/IT</option>
-<option className="text-[#686868]"  value="telecomm">Telecommunications</option>
-<option className="text-[#686868]"  value="travel">Travel/Hospitality</option>
-<option className="text-[#686868]"  value="other">Other</option>
+                      {industrys.map((industry) => (
+                        <>
+                          <option
+                            className="text-[#686868]"
+                            value={industry.indid}
+                            key={industry.indid}
+                          >
+                            {industry.ind_name}
+                          </option>
+                        </>
+                      ))}
                     </select>
                   </div>
                   <p className="label-text-alt text-[#fff] mt-3">
                     {errors.companytype?.message}
                   </p>
                 </div>
+
+               {/* <div>
+                  <p
+                    htmlFor=""
+                    className="text-[#fff] text-[18px] font-normal font-inter"
+                  >
+                    Industry*
+                  </p>
+                  <div>
+                    <select
+                      className=" textarea input hover:input-[#fff] rounded-none m-[0px]  w-full mt-2 border-b-[#ebebeb] border-t-transparent   border-r-transparent  border-l-transparent  bg-transparent focus:outline-none focus:ring-0 p-2 text-[#cdcdcd] text-[14px] font-[350]"
+                       name="companytype"
+                      {...register("companytype", { required: true })}
+                    >
+                      <option
+                           value=""
+                           selected
+                           disabled
+                           className="text-[#9CA3AF]"
+                      >
+                        Select Industry
+                      </option>
+                      {industrys.map((industry) => (
+                        <>
+                          <option
+                            className="text-[#686868]"
+                            value=""
+                            key={industry.indid}
+                          >
+                            {industry.ind_name}
+                          </option>
+                        </>
+                      ))}
+                    </select>
+                  </div>
+                <p className="label-text-alt text-[#fff] mt-3">
+                    {errors.companytype?.message}
+                  </p>
+                </div>  */}
               </div>
 
               <h2

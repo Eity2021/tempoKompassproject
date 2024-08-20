@@ -15,7 +15,7 @@ export default function CustomizeOffer({ setCustomizeModal }) {
   // const [pCode, setPCode] = useState([]);
   const { pCode, industrys } = useContextProvider();
 
-
+ 
   const {
     register,
     reset,
@@ -114,7 +114,7 @@ export default function CustomizeOffer({ setCustomizeModal }) {
                         name="pcode"
                         {...register("pcode", { required: true })}
                         className=" input  hover:input-[#fff] rounded-none m-[0px]  w-full mt-2 border-b-[#ebebeb] border-t-transparent   border-r-transparent  border-l-transparent  bg-transparent focus:outline-none focus:ring-0 p-2 text-[#cdcdcd] text-[14px] font-[350]"
-                        defaultValue="88"
+                        value="88"
                       >
                         {pCode.map((code) => (
                           <>
@@ -291,7 +291,7 @@ export default function CustomizeOffer({ setCustomizeModal }) {
                   </p>
                   <div>
                     <select
-                      className=" textarea input hover:input-[#fff] rounded-none m-[0px]  w-full mt-2 border-b-[#ebebeb] border-t-transparent   border-r-transparent  border-l-transparent  bg-transparent focus:outline-none focus:ring-0 p-2 text-[#cdcdcd] text-[14px] font-[350]"
+                      className=" textarea input hover:input-[#fff] rounded-none m-[0px]  w-full mt-2 border-b-[#ebebeb] border-t-transparent border-r-transparent  border-l-transparent  bg-transparent focus:outline-none focus:ring-0 p-2 text-[#cdcdcd] text-[14px] font-[350]"
                       name="industry_typ"
                       {...register("industry_typ", { required: true })}
                     >
@@ -307,7 +307,7 @@ export default function CustomizeOffer({ setCustomizeModal }) {
                         <>
                           <option
                             className="text-[#686868]"
-                            value=""
+                            value={industry.indid}
                             key={industry.indid}
                           >
                             {industry.ind_name}

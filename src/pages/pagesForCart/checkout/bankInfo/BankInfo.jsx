@@ -363,7 +363,7 @@ export default function BankInfo({ onButtonClick }) {
                 <div>
                   <div>
                     <select
-                      className=" input  rounded-none m-[0px]  w-full  bg-transparent focus:outline-none focus:ring-0  text-[#a0a2a5]  text-[14px] font-semibold	 placeholder:italic input input-bordered hover:input-primary w-full  mt-1 rounded-none"
+                      className=" input  rounded-none m-[0px]  w-full  bg-transparent focus:outline-none focus:ring-0  text-[#a0a2a5]  text-[14px] font-semibold	 placeholder:italic input-bordered hover:input-primary   mt-1 "
                       name="industry_typ"
                       {...register("industry_type", { required: true })}
                     >
@@ -374,7 +374,7 @@ export default function BankInfo({ onButtonClick }) {
                         <>
                           <option
                             // className="text-[#686868]"
-                            value=""
+                            value={industry.indid}
                             key={industry.indid}
                           >
                             {industry.ind_name}
