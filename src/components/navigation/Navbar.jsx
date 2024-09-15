@@ -69,7 +69,7 @@ export default function Navbar({ toggleDrawer, routes }) {
     <SNavbar transparent={transparentLogo} fixed={navbarFixed}>
       <NavContainer transparentColor={transparentLogo}>
         <Justify>
-          <DrawerButton onClick={toggleDrawer}>
+          <DrawerButton onClick={toggleDrawer} className="pt-[5px]">
             <FaBars />
           </DrawerButton>
           <div>
@@ -79,7 +79,7 @@ export default function Navbar({ toggleDrawer, routes }) {
                   effect="opacity"
                   src={logo}
                   alt="logo"
-                  className="w-100"
+                  className="w-100 pt-[5px]"
                 />
               </Link>
             ) : (
@@ -88,7 +88,7 @@ export default function Navbar({ toggleDrawer, routes }) {
                   effect="opacity"
                   src={logoTwo}
                   alt="logo"
-                  className="w-100"
+                  className="w-100 pt-[5px]"
                 />
               </Link>
             )}
@@ -112,7 +112,7 @@ export default function Navbar({ toggleDrawer, routes }) {
               })}
             </NavRoutes>
 
-            <div className="flex item-center lg:pr-[0px] pr-[10px]  ">
+            <div className=" md:pt-[0px] pt-[3px]  lg:pr-[0px] pr-[10px] flex ">
               {cart?.length === 0 ? (
                 <Link to="/pricing" className="">
                   <div className="relative mt-[-2px] ml-[26px]">
@@ -165,6 +165,7 @@ const DrawerButton = styled.button`
   display: grid;
   font-size: 1.5rem;
   padding-right: 20px;
+  padding-top:5px;
   @media (min-width: 991px) {
     display: none;
   }
@@ -231,6 +232,15 @@ const EventButton = styled.div`
   font-family: "Poppins", sans-serif;
   font-weight: bold;
   font-style: normal;
+
+  
+   @media (max-width: 480px) {
+
+     font-size: 10px;
+  font-weight: normal;
+}
+
+
 `;
 const AccountButton = styled.div`
   border: none;
@@ -240,7 +250,17 @@ const AccountButton = styled.div`
   font-family: "Poppins", sans-serif;
   font-weight: bold;
   font-style: normal;
+
+
+
+   @media (max-width: 480px) {
+
+     font-size: 10px;
+  font-weight: normal;
+}
 `;
+
+
 const Account = styled.div`
   width: 93px;
   height: 42px;
@@ -254,7 +274,22 @@ const Account = styled.div`
   border-radius: 8px;
   background-color: ${({ transparentColor }) =>
     transparentColor ? "rgba(255, 255, 255, 0.1)" : "#dbdfdf"};
+
+
+ @media (max-width: 480px) {
+  width: 66px;
+  height: 26px;
+    border-radius: 6px;
+    /* You can add more styles for mobile view here */
+  }
+ @media (max-width: 420px) {
+ display:none
+
+ }
+
 `;
+
+
 const Event = styled.div`
   width: 93px;
   height: 42px;
@@ -268,6 +303,15 @@ const Event = styled.div`
   border-radius: 8px;
   background-color: ${({ transparentColor }) =>
     transparentColor ? "rgba(255, 255, 255, 0.1)" : "#dbdfdf"};
+
+@media (max-width: 480px) {
+  width: 66px;
+  height: 26px;
+    border-radius: 6px;
+    /* You can add more styles for mobile view here */
+  }
+
+
 `;
 
 const Cart = styled.div`
@@ -285,9 +329,21 @@ const Cart = styled.div`
   top: 2px;
   right: -2px;
   border-width: 2px;
+    font-size:12px
   border-style: solid;
 
   border-color: ${({ transparentColor }) =>
     transparentColor ? "rgba(255, 255, 255, 0.2)" : "#bdc4c4"};
   font-family: "Poppins", sans-serif;
+
+
+
+  
+@media (max-width: 480px) {
+  width: 24px;
+  height: 24px;
+  border-radius: 16px;
+  font-size:12px
+  }
+  
 `;
