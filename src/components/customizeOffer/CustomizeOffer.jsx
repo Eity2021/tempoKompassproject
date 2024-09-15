@@ -44,7 +44,7 @@ export default function CustomizeOffer({ setCustomizeModal }) {
         <input type="checkbox" id="customize-modal" className="modal-toggle " />
         <div className="modal">
           <div className="modal-box w-11/12 max-w-5xl bg-[#076f74] rounded-none py-[35px] md:px-[80px] px-[20px]  z-50">
-            <div className="flex justify-end">
+            <div className="flex justify-end mb-[20px]">
               <label htmlFor="customize-modal" className="btn-none">
                 <Close></Close>
               </label>
@@ -56,7 +56,7 @@ export default function CustomizeOffer({ setCustomizeModal }) {
               >
                 Customize Offer Request
               </h1>
-              <p className="md:text-[20px]   text-[14px]  font-normal font-poppins text-[#fff] pt-[10px]">
+              <p className="md:text-[20px]   text-[14px]  font-normal font-poppins text-[#fff] pt-[15px]">
                 Fill out your details to get a Customize Your Offer
               </p>
             </div>
@@ -383,14 +383,14 @@ export default function CustomizeOffer({ setCustomizeModal }) {
                   </div>
                 </div>
 
-                <div className="flex    bg-[#fff] lg:h-[130px]  lg:w-[130px]   md:h-[90px]  md:w-[90px]  h-[80px] w-[80px] rounded-[50%] relative p-4" >
+                <div className="flex    bg-[#fff] lg:h-[130px]  lg:w-[130px]   md:h-[90px]  md:w-[90px]  h-[80px] w-[80px] rounded-[50%] relative p-4 md:mt-0 mt-4" >
                   <div className="flex justify-center ">
                     <input
                       className="   text-[#002C13] font-regular  lg:text-[20px] text-[14px]  cursor-pointer"
                       type="submit"
                     />
                   </div>
-                  <div className="absolute md:top-14 md:right-6 lg:flex hidden" >
+                  <div className="absolute md:top-14 md:right-6 lg:flex hidden " >
                     <WhiteArrow></WhiteArrow>
                   </div>
                 </div>

@@ -46,20 +46,20 @@ export default function TrailModal({ setTrailModal }) {
       <div>
         <input type="checkbox" id="my-modal" className="modal-toggle" />
         <div className="modal ">
-          <div className="modal-box w-11/12 max-w-5xl  bg-[#076f74] rounded-none py-[35px] px-[80px] ">
-            <div className="flex justify-end">
+          <div className="modal-box w-11/12 max-w-5xl  bg-[#076f74] rounded-none py-[35px] md:px-[80px] px-[20px]  z-50">
+            <div className="flex justify-end mb-[20px]">
               <label htmlFor="my-modal" className="btn-none">
                 <Close></Close>
               </label>
             </div>
             <div className="text-center mb-12">
               <h1
-                className="text-[60px] font-medium  font-mixed text-[#FFFFFF] "
+                className="lg:text-[60px] font-medium  font-mixed text-[#FFFFFF]   md:text-[40px]  text-[28px]  md:leading-0 leading-7"
                 style={{ fontFamily: "Noe Display" }}
               >
                 Request For a Free Trail
               </h1>
-              <p className="text-[20px] font-normal font-poppins text-[#fff]">
+              <p className="md:text-[20px]   text-[14px]  font-normal font-poppins text-[#fff] pt-[15px]">
                 Fill out your details to get a live demo of Campaign Monitor:
               </p>
             </div>
@@ -69,7 +69,7 @@ export default function TrailModal({ setTrailModal }) {
                 <div>
                   <p
                     htmlFor=""
-                    className="text-[#fff] text-[18px] font-normal font-inter"
+                    className="text-[#fff] md:text-[18px] text-[14px] font-normal font-inter"
                   >
                     Full Name*
                   </p>
@@ -87,7 +87,7 @@ export default function TrailModal({ setTrailModal }) {
                 <div>
                   <p
                     htmlFor=""
-                    className="text-[#fff] text-[18px] font-normal font-inter"
+                    className="text-[#fff] md:text-[18px] text-[14px] font-normal font-inter"
                   >
                     Company Name*
                   </p>
@@ -107,7 +107,7 @@ export default function TrailModal({ setTrailModal }) {
                 <div>
                   <p
                     htmlFor=""
-                    className="text-[#fff] text-[18px] font-normal font-inter"
+                    className="text-[#fff] md:text-[18px] text-[14px] font-normal font-inter"
                   >
                     Phone Number*
                   </p>
@@ -153,7 +153,7 @@ export default function TrailModal({ setTrailModal }) {
                 <div>
                   <p
                     htmlFor=""
-                    className="text-[#fff] text-[18px] font-normal font-inter"
+                    className="text-[#fff] md:text-[18px] text-[14px]  font-normal font-inter"
                   >
                     Number of Employee*
                   </p>
@@ -173,7 +173,7 @@ export default function TrailModal({ setTrailModal }) {
                 <div>
                   <p
                     htmlFor=""
-                    className="text-[#fff] text-[18px] font-normal font-inter"
+                    className="text-[#fff] md:text-[18px] text-[14px] font-normal font-inter"
                   >
                     Designation*
                   </p>
@@ -263,7 +263,7 @@ export default function TrailModal({ setTrailModal }) {
                 <div>
                   <p
                     htmlFor=""
-                    className="text-[#fff] text-[18px] font-normal font-inter"
+                    className="text-[#fff] md:text-[18px] text-[14px] font-normal font-inter"
                   >
                     Email Address*
                   </p>
@@ -284,7 +284,7 @@ export default function TrailModal({ setTrailModal }) {
                 <div>
                   <p
                     htmlFor=""
-                    className="text-[#fff] text-[18px] font-normal font-inter"
+                    className="text-[#fff] md:text-[18px] text-[14px]  font-normal font-inter"
                   >
                     Billing Address*
                   </p>
@@ -303,7 +303,7 @@ export default function TrailModal({ setTrailModal }) {
                 <div>
                   <p
                     htmlFor=""
-                    className="text-[#fff] text-[18px] font-normal font-inter"
+                    className="text-[#fff] md:text-[18px] text-[14px] font-normal font-inter"
                   >
                     Industry*
                   </p>
@@ -339,53 +339,16 @@ export default function TrailModal({ setTrailModal }) {
                   </p>
                 </div>
 
-               {/* <div>
-                  <p
-                    htmlFor=""
-                    className="text-[#fff] text-[18px] font-normal font-inter"
-                  >
-                    Industry*
-                  </p>
-                  <div>
-                    <select
-                      className=" textarea input hover:input-[#fff] rounded-none m-[0px]  w-full mt-2 border-b-[#ebebeb] border-t-transparent   border-r-transparent  border-l-transparent  bg-transparent focus:outline-none focus:ring-0 p-2 text-[#cdcdcd] text-[14px] font-[350]"
-                       name="companytype"
-                      {...register("companytype", { required: true })}
-                    >
-                      <option
-                           value=""
-                           selected
-                           disabled
-                           className="text-[#9CA3AF]"
-                      >
-                        Select Industry
-                      </option>
-                      {industrys.map((industry) => (
-                        <>
-                          <option
-                            className="text-[#686868]"
-                            value=""
-                            key={industry.indid}
-                          >
-                            {industry.ind_name}
-                          </option>
-                        </>
-                      ))}
-                    </select>
-                  </div>
-                <p className="label-text-alt text-[#fff] mt-3">
-                    {errors.companytype?.message}
-                  </p>
-                </div>  */}
+
               </div>
 
               <h2
                 htmlFor=""
-                className="text-[#fff] text-[18px] font-normal font-inter mt-4 mb-[20px]"
+                className="text-[#fff] md:text-[18px] text-[14px]  font-normal font-inter mt-4 mb-[20px]"
               >
                 Trail For *
               </h2>
-              <div className="flex mr-[20px] justify-between ">
+              <div className="md:flex block  mr-[20px] justify-between ">
                 <div className="flex">
                   <div className="mr-[15px]">
                     <div className="form-control">
@@ -398,7 +361,7 @@ export default function TrailModal({ setTrailModal }) {
                           {...register("trailproduct", { required: true })}
                         />
 
-                        <h2 className=" text-[#fff] text-[18px] font-normal font-inter">
+                        <h2 className=" text-[#fff] md:text-[18px] text-[14px]  font-normal font-inter">
                           Kompass Connect
                         </h2>
                       </label>
@@ -415,7 +378,7 @@ export default function TrailModal({ setTrailModal }) {
                           value="lms"
                           {...register("trailproduct", { required: true })}
                         />
-                        <h2 className=" text-[#fff] text-[18px] font-normal font-inter">
+                        <h2 className=" text-[#fff] md:text-[18px] text-[14px]  font-normal font-inter">
                           Kompass Lobby
                         </h2>
                       </label>
@@ -431,25 +394,23 @@ export default function TrailModal({ setTrailModal }) {
                           className="checkbox checkbox-primary"
                           {...register("trailproduct", { required: true })}
                         />
-                        <h2 className=" text-[#fff] text-[18px] font-normal font-inter">
+                        <h2 className=" text-[#fff] md:text-[18px] text-[14px] font-normal font-inter">
                           kompass Teams
                         </h2>
                       </label>
                     </div>
                   </div>
                 </div>
-                {/* <p className="label-text-alt text-red-500 mt-3">
-                  {errors.trailproduct?.message}
-                </p> */}
+            
 
-                <div className="flex  justify-center  bg-[#fff] h-[130px] w-[130px]  rounded-[50%]">
+<div className="flex    bg-[#fff] lg:h-[130px]  lg:w-[130px]   md:h-[90px]  md:w-[90px]  h-[80px] w-[80px] rounded-[50%] relative p-4 md:mt-0 mt-4" >
                   <div className="flex justify-center ">
                     <input
-                      className="   text-[#002C13] font-regular  text-[20px]  cursor-pointer"
+                      className="   text-[#002C13] font-regular  lg:text-[20px] text-[14px]  cursor-pointer"
                       type="submit"
                     />
                   </div>
-                  <div className="mt-[53px]">
+                  <div className="absolute md:top-14 md:right-6 lg:flex hidden" >
                     <WhiteArrow></WhiteArrow>
                   </div>
                 </div>
