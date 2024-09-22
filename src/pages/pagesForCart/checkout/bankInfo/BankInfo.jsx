@@ -374,6 +374,7 @@ export default function BankInfo({ onButtonClick }) {
                         <>
                           <option
                             // className="text-[#686868]"
+                            // className="text-[#686868]"
                             value={industry.indid}
                             key={industry.indid}
                           >
