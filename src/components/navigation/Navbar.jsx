@@ -112,7 +112,7 @@ export default function Navbar({ toggleDrawer, routes }) {
               })}
             </NavRoutes>
 
-            <div className=" md:pt-[0px] pt-[3px]  lg:pr-[0px] pr-[10px] flex ">
+            <div className=" pr-[10px] flex ">
               {cart?.length === 0 ? (
                 <Link to="/pricing" className="">
                   <div className="relative mt-[-2px] ml-[26px]">
@@ -133,7 +133,7 @@ export default function Navbar({ toggleDrawer, routes }) {
             </div>
           </RightNav>
         </Justify>
-        <div className="flex gap-4">
+        <div className="flex gap-6">
           <Event transparentColor={transparentLogo} onClick={handleEventChange}>
             <EventButton transparentColor={transparentLogo}>Event</EventButton>
           </Event>
@@ -264,7 +264,7 @@ const AccountButton = styled.div`
 const Account = styled.div`
   width: 93px;
   height: 42px;
-  border-width: 2px;
+  border-width: 1px;
   border-style: solid;
   border-color: ${({ transparentColor }) =>
     transparentColor ? "rgba(255, 255, 255, 0.2)" : "#bdc4c4"};
@@ -279,7 +279,7 @@ const Account = styled.div`
  @media (max-width: 480px) {
   width: 66px;
   height: 26px;
-    border-radius: 6px;
+    border-radius: 4px;
     /* You can add more styles for mobile view here */
   }
  @media (max-width: 420px) {
@@ -293,7 +293,7 @@ const Account = styled.div`
 const Event = styled.div`
   width: 93px;
   height: 42px;
-  border-width: 2px;
+  border-width: 1px;
   border-style: solid;
   border-color: ${({ transparentColor }) =>
     transparentColor ? "rgba(255, 255, 255, 0.2)" : "#bdc4c4"};
@@ -307,7 +307,7 @@ const Event = styled.div`
 @media (max-width: 480px) {
   width: 66px;
   height: 26px;
-    border-radius: 6px;
+    border-radius: 4px;
     /* You can add more styles for mobile view here */
   }
 
@@ -343,7 +343,8 @@ const Cart = styled.div`
   width: 24px;
   height: 24px;
   border-radius: 16px;
-  font-size:12px
+  font-size:12px;
+    margin-top:8px;
   }
   
 `;
