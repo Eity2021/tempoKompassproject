@@ -43,20 +43,20 @@ export default function CustomizeOffer({ setCustomizeModal }) {
       <div>
         <input type="checkbox" id="customize-modal" className="modal-toggle " />
         <div className="modal">
-          <div className="modal-box w-11/12 max-w-5xl bg-[#076f74] rounded-none py-[35px] px-[80px]  z-50">
-            <div className="flex justify-end">
+          <div className="modal-box w-11/12 max-w-5xl bg-[#076f74] rounded-none py-[35px] md:px-[80px] px-[20px]  z-50">
+            <div className="flex justify-end mb-[20px]">
               <label htmlFor="customize-modal" className="btn-none">
                 <Close></Close>
               </label>
             </div>
             <div className="text-center mb-12">
               <h1
-                className="text-[60px] font-medium  font-mixed text-[#FFFFFF] "
+                className="lg:text-[60px]  md:text-[40px]  text-[28px] font-medium  font-mixed text-[#FFFFFF] md:leading-0 leading-7"
                 style={{ fontFamily: "Noe Display" }}
               >
                 Customize Offer Request
               </h1>
-              <p className="text-[20px] font-normal font-poppins text-[#fff]">
+              <p className="md:text-[20px]   text-[14px]  font-normal font-poppins text-[#fff] pt-[15px]">
                 Fill out your details to get a Customize Your Offer
               </p>
             </div>
@@ -66,7 +66,7 @@ export default function CustomizeOffer({ setCustomizeModal }) {
                 <div>
                   <p
                     htmlFor=""
-                    className="text-[#fff] text-[18px] font-normal font-inter"
+                    className="text-[#fff] md:text-[18px] text-[14px] font-normal font-inter"
                   >
                     Full Name*
                   </p>
@@ -84,7 +84,7 @@ export default function CustomizeOffer({ setCustomizeModal }) {
                 <div>
                   <p
                     htmlFor=""
-                    className="text-[#fff] text-[18px] font-normal font-inter"
+                    className="text-[#fff] md:text-[18px] text-[14px]  font-normal font-inter"
                   >
                     Company Name*
                   </p>
@@ -104,7 +104,7 @@ export default function CustomizeOffer({ setCustomizeModal }) {
                 <div>
                   <p
                     htmlFor=""
-                    className="text-[#fff] text-[18px] font-normal font-inter"
+                    className="text-[#fff] md:text-[18px] text-[14px]  font-normal font-inter"
                   >
                     Phone Number*
                   </p>
@@ -147,7 +147,7 @@ export default function CustomizeOffer({ setCustomizeModal }) {
                 <div>
                   <p
                     htmlFor=""
-                    className="text-[#fff] text-[18px] font-normal font-inter"
+                    className="text-[#fff] md:text-[18px] text-[14px]  font-normal font-inter"
                   >
                     Number of Employee*
                   </p>
@@ -167,7 +167,7 @@ export default function CustomizeOffer({ setCustomizeModal }) {
                 <div>
                   <p
                     htmlFor=""
-                    className="text-[#fff] text-[18px] font-normal font-inter"
+                    className="text-[#fff] md:text-[18px] text-[14px]  font-normal font-inter"
                   >
                     Designation*
                   </p>
@@ -245,7 +245,7 @@ export default function CustomizeOffer({ setCustomizeModal }) {
                 <div>
                   <p
                     htmlFor=""
-                    className="text-[#fff] text-[18px] font-normal font-inter"
+                    className="text-[#fff] md:text-[18px] text-[14px]  font-normal font-inter"
                   >
                     Email Address*
                   </p>
@@ -266,7 +266,7 @@ export default function CustomizeOffer({ setCustomizeModal }) {
                 <div>
                   <p
                     htmlFor=""
-                    className="text-[#fff] text-[18px] font-normal font-inter"
+                    className="text-[#fff] md:text-[18px] text-[14px] font-normal font-inter"
                   >
                     Billing Address*
                   </p>
@@ -285,7 +285,7 @@ export default function CustomizeOffer({ setCustomizeModal }) {
                 <div>
                   <p
                     htmlFor=""
-                    className="text-[#fff] text-[18px] font-normal font-inter"
+                    className="text-[#fff] md:text-[18px] text-[14px]  font-normal font-inter"
                   >
                     Industry*
                   </p>
@@ -324,11 +324,11 @@ export default function CustomizeOffer({ setCustomizeModal }) {
 
               <h2
                 htmlFor=""
-                className="text-[#fff] text-[18px] font-normal font-inter mt-4"
+                className="text-[#fff] md:text-[18px] text-[14px] ont-normal font-inter mt-4"
               >
                 Customize For *
               </h2>
-              <div className="flex mr-[20px] justify-between ">
+              <div className="md:flex block  mr-[20px] justify-between ">
                 <div className="flex">
                   <div className="mr-[15px]">
                     <div className="form-control">
@@ -337,11 +337,11 @@ export default function CustomizeOffer({ setCustomizeModal }) {
                           type="checkbox"
                           name="vms"
                           value="VMS"
-                          className="checkbox checkbox-primary"
+                          className="checkbox checkbox-primary w-5 h-5 mt-1"
                           {...register("req_packages", { required: true })}
                         />
 
-                        <h2 className="text-[#fff] text-[18px] font-normal font-inter">
+                        <h2 className="text-[#fff] md:text-[18px] text-[14px] font-normal font-inter">
                           Kompass Connect
                         </h2>
                       </label>
@@ -353,12 +353,12 @@ export default function CustomizeOffer({ setCustomizeModal }) {
                       <label className="flex gap-2">
                         <input
                           type="checkbox"
-                          className="checkbox checkbox-primary"
+                          className="checkbox checkbox-primary w-5 h-5 mt-1"
                           name="lms"
                           value="LMS"
                           {...register("req_packages", { required: true })}
                         />
-                        <h2 className="text-[#fff] text-[18px] font-normal font-inter">
+                        <h2 className="text-[#fff] md:text-[18px] text-[14px]  font-normal font-inter">
                           Kompass Lobby
                         </h2>
                       </label>
@@ -372,10 +372,10 @@ export default function CustomizeOffer({ setCustomizeModal }) {
                           type="checkbox"
                           name="pms"
                           value="PMS"
-                          className="checkbox checkbox-primary"
+                          className="checkbox checkbox-primary w-5 h-5 mt-1"
                           {...register("req_packages", { required: true })}
                         />
-                        <h2 className=" text-[#fff] text-[18px] font-normal font-inter">
+                        <h2 className=" text-[#fff] md:text-[18px] text-[14px]  font-normal font-inter">
                           Kompass Teams
                         </h2>
                       </label>
@@ -383,14 +383,14 @@ export default function CustomizeOffer({ setCustomizeModal }) {
                   </div>
                 </div>
 
-                <div className="flex  justify-center  bg-[#fff] h-[130px] w-[130px]  rounded-[50%]">
+                <div className="flex    bg-[#fff] lg:h-[130px]  lg:w-[130px]   md:h-[90px]  md:w-[90px]  h-[80px] w-[80px] rounded-[50%] relative p-4 md:mt-0 mt-4" >
                   <div className="flex justify-center ">
                     <input
-                      className="   text-[#002C13] font-regular  text-[20px]  cursor-pointer"
+                      className="   text-[#002C13] font-regular  lg:text-[20px] text-[14px]  cursor-pointer"
                       type="submit"
                     />
                   </div>
-                  <div className="mt-[53px]">
+                  <div className="absolute md:top-14 md:right-6 lg:flex hidden " >
                     <WhiteArrow></WhiteArrow>
                   </div>
                 </div>

@@ -23,7 +23,7 @@ export default function ScrollDemo() {
   return (
     <div>
       {top && (
-        <button className="fixed bottom-24 right-8 shadow-lg lg:h-14 lg:w-14  h-10 w-10 rounded-[50%] bg-white flex justify-center items-center" onClick={scrollTop}>
+        <button className="fixed bottom-24 right-8 shadow-lg lg:h-14 lg:w-14  h-10 w-10 rounded-[50%] bg-white flex justify-center items-center z-50" onClick={scrollTop}>
           {/* <LazyLoadImage src={scroll} alt="" className="lg:h-10 lg:w-10 h-8 w-8 "/> */}
           <UpArrow></UpArrow>
         </button>
