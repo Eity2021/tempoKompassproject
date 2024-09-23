@@ -329,7 +329,7 @@ const Cart = styled.div`
   top: 2px;
   right: -2px;
   border-width: 2px;
-    font-size:12px
+  font-size:14px;
   border-style: solid;
 
   border-color: ${({ transparentColor }) =>
