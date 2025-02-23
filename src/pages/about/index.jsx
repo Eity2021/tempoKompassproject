@@ -16,9 +16,9 @@ export default function About() {
         <div className=" ">
           <div className="pt-[140px] ">
             <div className=" ">
-              <AboutText></AboutText>
-              <AboutUs></AboutUs>
-              <Teams></Teams>
+         <AboutText></AboutText>
+                   {/* <AboutUs></AboutUs>
+              <Teams></Teams> */}
              <Values></Values>
               <JoinTeam></JoinTeam>
                  <FQA></FQA>

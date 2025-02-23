@@ -103,6 +103,7 @@ export default function ConfirmPayment({ onButtonClick }) {
     .then((res) => {
       if (res.data.status === "SUCCESS" || res.data.status === "success" || res.data.status === "Success" ) {
         window.open(res.data.data, "_self");
+        console.log(res.data.data)
       } else if (res.data.code === 400) {
         swal(res.data.message);
         navigate(setPage("checkout"));
@@ -110,11 +111,6 @@ export default function ConfirmPayment({ onButtonClick }) {
     });
   
 }
-
-
-
-
-
 
 
 

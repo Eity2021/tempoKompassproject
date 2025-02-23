@@ -1,45 +1,46 @@
 import React, { Fragment, useEffect, useState } from "react";
-
 import CountUp from "react-countup";
 import VisibilitySensor from "react-visibility-sensor";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 import bg from "../../assets/Nimages/Home/numbersbg.png";
-import "react-lazy-load-image-component/src/effects/blur.css";
+
 const numbersOf = {
   box: " flex justify-center text-center items-center px-2 h-[229px]",
   LazyLoadImage: "h-16 w-16 mt-6 rounded-[50%]",
 };
+
 export default function NumbersOf({ ...rest }) {
   const [counterUp, setCounterUp] = useState(false);
   const [counterNumber, setCounterNumber] = useState("");
 
   useEffect(() => {
-
     const controller = new AbortController();
     const { signal } = controller;
-  
+
     const fetchData = async () => {
       try {
-        const response = await fetch("https://api.hellokompass.com/webcount/list", { signal });
+        const response = await fetch(
+          "https://api.hellokompass.com/webcount/list",
+          { signal }
+        );
         const data = await response.json();
         setCounterNumber(data.data);
       } catch (error) {
         if (error.name === "AbortError") {
-        <></>
+          <></>;
         } else {
           console.error("Fetch error:", error);
         }
       }
     };
-  
+
     fetchData();
-  
 
     return () => {
       controller.abort();
     };
-  }, []);  
-  
+  }, []);
 
   return (
     <div className=" md:px-[68px]  py-[48px] px-[20px] ">
@@ -64,8 +65,6 @@ export default function NumbersOf({ ...rest }) {
           </div>
 
           <div className=" grid lg:grid-cols-3  grid-cols-1 gap-4">
-
-
             {/*  A div with a class name of numbersOf.box. */}
             <Fragment>
               <div className={numbersOf.box}>
@@ -101,7 +100,7 @@ export default function NumbersOf({ ...rest }) {
                     </strong>
 
                     <p className="ml-6 font-medium text-[#fff] text-[20px] my-1 font-poppins uppercase">
-                      Numbers of Companies{" "}
+                      Number of Companies{" "}
                     </p>
                   </div>
                 </div>
@@ -142,7 +141,7 @@ export default function NumbersOf({ ...rest }) {
                     </strong>
 
                     <p className="ml-6 font-medium text-[#fff] text-[20px] my-1 font-poppins uppercase">
-                      Numbers of Users{" "}
+                      Number of Users{" "}
                     </p>
                   </div>
                 </div>
@@ -210,12 +209,9 @@ export default function NumbersOf({ ...rest }) {
                 </div>
               </div>
             </Fragment>
-
-
           </div>
         </div>
       </div>
     </div>
   );
 }
- 

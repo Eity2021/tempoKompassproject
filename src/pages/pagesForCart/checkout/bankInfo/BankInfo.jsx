@@ -25,7 +25,6 @@ export default function BankInfo({ onButtonClick }) {
     pCode,
     industrys,
   } = useContextProvider();
-  console.log(industrys);
   let mainVat;
   let vatValue;
   for (const vat of pCode) {

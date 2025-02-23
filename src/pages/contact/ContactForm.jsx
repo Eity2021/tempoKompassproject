@@ -49,7 +49,6 @@ export default function ContactForm() {
                 className="text-[32px] text-[#000000] font-bold pt-[3px] "
                 style={{ fontFamily: "Noe Display" }}
               >
-                {" "}
                 Email US
               </p>
               <p className="text-[16px] text-[#0C1E21] font-regular pt-[15px] font-poppins ">
@@ -65,16 +64,18 @@ export default function ContactForm() {
                 className="text-[32px] text-[#000000] font-bold"
                 style={{ fontFamily: "Noe Display" }}
               >
-                {" "}
                 Socials
               </p>
               <p className="text-[16px] text-[#0C1E21] font-regular pt-[15px] font-poppins underline">
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <a href=""> Linkedin </a>
               </p>
               <p className="text-[16px] text-[#0C1E21] font-regular  pt-[10px] font-poppins underline">
-                <a href="">Twitter</a>{" "}
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                <a href="">Twitter</a>
               </p>
               <p className="text-[16px] text-[#0C1E21] font-regular  pt-[10px] font-poppins underline">
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <a href=""> Facebook </a>
               </p>
             </div>
