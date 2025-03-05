@@ -72,7 +72,7 @@ export default function Footer() {
 
               <p className="font-mukta font-regular text-[#404040] md:text-[14px] text-[13px]  leading-7">
                 {" "}
-                <p> Suite 6B,Holding No 10,Road No 1,Block B, Niketan</p>
+                <p> Flat 2A, House 118, Road 2, Block A Niketan</p>
                 <p>Gulshan, Dhaka-1212,Bangladesh</p>
               </p>
             </div>
