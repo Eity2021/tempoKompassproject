@@ -58,10 +58,10 @@ export default function map() {
                   Our location
                 </p>
                 <p className="text-[16px] text-[#0C1E21] font-regular pt-[15px] p-[32px]  font-poppins ">
-                Commercial Address: Suite <br></br>6B,H10,R1,Block B, Niketan <br></br> Gulshan, Dhaka <br></br> 1212,Bangladesh
+                Commercial Address: Flat 2A, House 118, Road 2, Block A Niketan<br></br> Gulshan, Dhaka-1212,Bangladesh
                 </p>
-                {/* <p className="text-[16px] text-[#0C1E21] font-regular pt-[15px] p-[32px]  font-poppins ">
-                Registered Address: Plot-7,<br></br>Road-17, 5th Floor Rupsha <br></br>Tower, Banani Dhaka <br></br>1213,Bangladesh</p> */}
+                
+            
               </div>
             </div>
           </div>
