@@ -27,21 +27,24 @@ export default function Pricing() {
   };
 
   useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
-    fetch("https://services.hellokompass.com/getproductlistinfo", { signal })
+    let isMounted = true;
+
+    fetch("https://services.hellokompass.com/getproductlistinfo")
       .then((res) => res.json())
       .then((data) => {
-        setAppointPrice(data.allproduct.VSEARCH);
-        setLobbyPrice(data.allproduct.LSEARCH);
-        setPayrollPrice(data.allproduct.PSEARCH);
+        if (isMounted) {
+          setAppointPrice(data.allproduct.VSEARCH);
+          setLobbyPrice(data.allproduct.LSEARCH);
+          setPayrollPrice(data.allproduct.PSEARCH);
+        }
       })
       .catch((error) => {
-        if (error.name === "AbortError") {
-        <></>
-        }
+        console.error("Fetch error:", error);
       });
-    return () => controller.abort();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
@@ -58,28 +61,27 @@ export default function Pricing() {
 
       <div className="flex justify-center">
         <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
-       <div>
-       <a
-            href="https://my.hellokompass.com/login/signupform"
-            target="_blank"
-            className="flex items-center"
-            rel="noreferrer"
-          >
-            <div className="btn btn-primary  text-white   w-[260px] rounded-[30px] mb-3 text-lg ">
-              <span className="pr-[8px] text-[14px] font-medium font-poppins ">
-                Join For Free{" "}
-              </span>
-              <TrailArrow></TrailArrow>
-            </div>
-          </a>
-       </div>
+          <div>
+            <a
+              href="https://my.hellokompass.com/login/signupform"
+              target="_blank"
+              className="flex items-center"
+              rel="noreferrer"
+            >
+              <div className="btn btn-primary  text-white   w-[260px] rounded-[30px] mb-3 text-lg ">
+                <span className="pr-[8px] text-[14px] font-medium font-poppins ">
+                  Join For Free{" "}
+                </span>
+                <TrailArrow></TrailArrow>
+              </div>
+            </a>
+          </div>
 
           <div className="flex justify-center">
             <label
               htmlFor="my-modal"
               className=" btn bg-[#000] w-[260px] text-white  rounded-[30px] mb-3 text-lg hover:bg-[#0d0d0d] "
             >
-            
               <span className="pr-[8px] text-[14px] font-medium font-poppins ">
                 Free Corporate Trial
               </span>
@@ -89,7 +91,6 @@ export default function Pricing() {
         </div>
       </div>
 
-      
       <div className="flex justify-center">
         <div className=" flex 2xl:w-[45%] xl:w-[60%] lg:w-[90%] w-[100%]">
           <button

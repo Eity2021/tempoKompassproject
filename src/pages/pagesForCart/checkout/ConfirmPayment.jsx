@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useContextProvider } from "../../../components/contextProvider/PricingProvider";
@@ -99,18 +99,17 @@ export default function ConfirmPayment({ onButtonClick }) {
   const onSubmit = (data) => {
     setUserData({ ...userData, ...data });
     axios
-    .post("https://epay.hellokompass.com/quicksend-paymentinfo", data)
-    .then((res) => {
-      if (res.data.status === "SUCCESS" || res.data.status === "success" || res.data.status === "Success" ) {
-        window.open(res.data.data, "_self");
-        console.log(res.data.data)
-      } else if (res.data.code === 400) {
-        swal(res.data.message);
-        navigate(setPage("checkout"));
-      }
-    });
-  
-}
+      .post("https://epay.hellokompass.com/quicksend-paymentinfo", data)
+      .then((res) => {
+        if (res.data.status === "SUCCESS" || res.data.status === "success" || res.data.status === "Success") {
+          window.open(res.data.data, "_self");
+        } else if (res.data.code === 400) {
+          swal(res.data.message);
+          navigate(setPage("checkout"));
+        }
+      });
+
+  }
 
 
 
@@ -213,20 +212,20 @@ export default function ConfirmPayment({ onButtonClick }) {
               </div>
             </div>
           </div>
-         
+
           <div className="grid md:grid-cols-3 grid-cols-1 gap-16">
             <div className="orderId col-span-2">
-            <div className="flex justify-end pb-[30px]">
-              <div>
-                <ChevronRight></ChevronRight>
+              <div className="flex justify-end pb-[30px]">
+                <div>
+                  <ChevronRight></ChevronRight>
+                </div>
+                <button
+                  className="text-[#0C1E21] font-regular  font-poppins text-[16px] underline"
+                  onClick={() => onButtonClick("checkout")}
+                >
+                  Back
+                </button>
               </div>
-              <button
-                className="text-[#0C1E21] font-regular  font-poppins text-[16px] underline"
-                onClick={() => onButtonClick("checkout")}
-              >
-                Back
-              </button>
-            </div>
               <h1 className="text-[16px] font-bold text-[#0C1E21] mb-2">
                 Order ID : {order.data.order_id}
               </h1>
@@ -252,7 +251,7 @@ export default function ConfirmPayment({ onButtonClick }) {
 
                 <div>
                   <div>
-                    {location.uconunty ==="Bangladesh" ? (
+                    {location.uconunty === "Bangladesh" ? (
                       <div className="ml-[30px]">
                         <div className="flex justify-between mb-6  pt-3">
                           <p className="text-[16px] font-bold  text-[#0C1E21] font-poppins ">
@@ -353,7 +352,7 @@ export default function ConfirmPayment({ onButtonClick }) {
               Pay Now
             </button>
           </div>
-       
+
         </form>
       </div>
     </div>

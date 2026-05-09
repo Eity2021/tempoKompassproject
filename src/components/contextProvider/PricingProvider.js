@@ -8,7 +8,7 @@ import React, {
 
 const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
 const orderInfo = JSON.parse(localStorage.getItem("orderInfo"));
-// const eventOrderInfo = JSON.parse(localStorage.getItem("eventOrderInfo")) || {}; 
+// const eventOrderInfo = JSON.parse(localStorage.getItem("eventOrderInfo")) || {};
 export const PricingContext = createContext();
 
 export const PricingProvider = ({ children }) => {
@@ -17,7 +17,7 @@ export const PricingProvider = ({ children }) => {
   const [toggleLobby, setToggleLobby] = useState(false);
   const [togglePayroll, setTogglePayroll] = useState(false);
   const [order, setOrder] = useState(orderInfo);
-  const{eventOrder,setEventOrder} = useState({});
+  const { eventOrder, setEventOrder } = useState({});
   const [calculation, setCalculation] = useState("");
   const [userData, setUserData] = useState([]);
 
@@ -48,56 +48,54 @@ export const PricingProvider = ({ children }) => {
   const partners = useRef();
 
   useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
-    fetch("https://api.hellokompass.com/geoloacation-info", { signal })
+    let isMounted = true;
+    fetch("https://api.hellokompass.com/geoloacation-info")
       .then((res) => res.json())
       .then((data) => {
-        setLocation(data);
-    
+        if (isMounted) {
+          setLocation(data);
+        }
       })
       .catch((error) => {
-        if (error.name === "AbortError") {
-         <></>
-        }
+        console.error("Fetch error:", error);
       });
-    return () => controller.abort();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
-
-
   useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
-    fetch("https://api.hellokompass.com/industrylist", { signal })
+    let isMounted = true;
+    fetch("https://api.hellokompass.com/industrylist")
       .then((res) => res.json())
       .then((data) => {
-        setIndustrys(data.data);
-    
+        if (isMounted) {
+          setIndustrys(data.data);
+        }
       })
       .catch((error) => {
-        if (error.name === "AbortError") {
-         <></>
-        }
+        console.error("Fetch error:", error);
       });
-    return () => controller.abort();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
-
   useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
-    fetch("https://api.hellokompass.com/country", { signal })
+    let isMounted = true;
+    fetch("https://api.hellokompass.com/country")
       .then((res) => res.json())
       .then((data) => {
-        setPCode(data.data);
+        if (isMounted) {
+          setPCode(data.data);
+        }
       })
       .catch((error) => {
-        if (error.name === "AbortError") {
-          <></>;
-        }
+        console.error("Fetch error:", error);
       });
-    return () => controller.abort();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -168,9 +166,12 @@ export const PricingProvider = ({ children }) => {
         setPhoneCode,
         PhoneHandle,
         phoneCodeHandle,
-         eventOrder,setEventOrder,
-         isEventModalOpen, setIsEventModalOpen,
-         industrys, setIndustrys
+        eventOrder,
+        setEventOrder,
+        isEventModalOpen,
+        setIsEventModalOpen,
+        industrys,
+        setIndustrys,
       }}
     >
       {children}

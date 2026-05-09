@@ -12,33 +12,40 @@ const numbersOf = {
 
 export default function NumbersOf({ ...rest }) {
   const [counterUp, setCounterUp] = useState(false);
-  const [counterNumber, setCounterNumber] = useState("");
+  const [counterNumber, setCounterNumber] = useState({
+    TotalCompany: 0,
+    TotalUser: 0,
+    TotalHotel: 0,
+  });
 
   useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
+    let isMounted = true;
 
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "https://api.hellokompass.com/webcount/list",
-          { signal }
-        );
-        const data = await response.json();
-        setCounterNumber(data.data);
-      } catch (error) {
-        if (error.name === "AbortError") {
-          <></>;
-        } else {
-          console.error("Fetch error:", error);
+        const response = await fetch("https://api.hellokompass.com/webcount/list");
+
+        if (!response.ok) {
+          throw new Error(`Fetch failed with status ${response.status}`);
         }
+
+        const data = await response.json();
+        if (isMounted) {
+          setCounterNumber(data?.data ?? {
+            TotalCompany: 0,
+            TotalUser: 0,
+            TotalHotel: 0,
+          });
+        }
+      } catch (error) {
+        console.error("Fetch error:", error);
       }
     };
 
     fetchData();
 
     return () => {
-      controller.abort();
+      isMounted = false;
     };
   }, []);
 

@@ -31,21 +31,21 @@ export default function DetailsViewPage() {
   } = eventView;
   const fees = evntfeests?.toUpperCase();
 
-
   useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
-    fetch(`https://api.hellokompass.com/event/webevntshow/${selectedView}`, {
-      signal,
-    })
+    let isMounted = true;
+    fetch(`https://api.hellokompass.com/event/webevntshow/${selectedView}`)
       .then((res) => res.json())
-      .then((data) => setEventView(data.data))
-      .catch((error) => {
-        if (error.name === "AbortError") {
-        <></>
+      .then((data) => {
+        if (isMounted) {
+          setEventView(data.data);
         }
+      })
+      .catch((error) => {
+        console.error("Fetch error:", error);
       });
-    return () => controller.abort();
+    return () => {
+      isMounted = false;
+    };
   }, [selectedView, setEventView]);
 
   const handleBookNow = () => {
@@ -54,14 +54,12 @@ export default function DetailsViewPage() {
   };
   return (
     <div className="mt-[90px]">
-      {
-        evntbanner && (
-          <div>
+      {evntbanner && (
+        <div>
           <img src={evntbanner} alt="" className="h-[600px] w-[100%]" />
         </div>
-        )
-      }
-     
+      )}
+
       <div className="container">
         <div className=" mt-[100px]  mb-[30px] ">
           <div className="flex justify-between">

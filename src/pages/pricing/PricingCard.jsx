@@ -42,7 +42,6 @@ export default function PricingCard({
   changeToggle,
 }) {
   const { location, cart, setCart } = useContextProvider();
- console.log('location',location)
   const { etype, dxinfo, ename } = pricingItem;
 
   const vbdt = Number(dxinfo.vubdt);
@@ -225,7 +224,7 @@ export default function PricingCard({
             {ename === "LMS" ? (
               <div>
                 {location.uconunty === "Bangladesh" ||
-                location.uconunty === "bangladesh" ? (
+                  location.uconunty === "bangladesh" ? (
                   <div>
                     {etype === "Standard" ? (
                       <div>
@@ -262,7 +261,7 @@ export default function PricingCard({
             ) : (
               <div>
                 {location.uconunty === "Bangladesh" ||
-                location.uconunty === "bangladesh" ? (
+                  location.uconunty === "bangladesh" ? (
                   <div>
                     {etype === "Standard" ? (
                       <>
@@ -657,7 +656,7 @@ export default function PricingCard({
                         <div>
                           {" "}
                           <p className="text-[15px] text-[#3F3F3F] mt-0 font-regular text-left">
-                            This is suitable for a small Restaurants, Hotels & 
+                            This is suitable for a small Restaurants, Hotels &
                             Resorts (
                             <span className="text-[15px] ">
                               +{dxinfo?.vlobycheckbdt}৳ per check-in
@@ -781,7 +780,7 @@ export default function PricingCard({
                         <div>
                           {" "}
                           <p className="text-[15px]   text-[#3F3F3F] mt-0 font-regular text-left">
-                            This is suitable for a Large Restaurants ,Hotels & 
+                            This is suitable for a Large Restaurants ,Hotels &
                             Resorts (
                             <span className="text-[15px]">
                               +{dxinfo?.vlobycheckbdt}৳ per check-in
@@ -799,7 +798,7 @@ export default function PricingCard({
                         <div>
                           {" "}
                           <p className="text-[15px]   text-[#3F3F3F] mt-0 font-regular text-left">
-                            This is suitable for a Large Restaurants ,Hotels & 
+                            This is suitable for a Large Restaurants ,Hotels &
                             Resorts (
                             <span className="text-[15px]">
                               +${dxinfo?.vregusd} per check-in
@@ -914,7 +913,7 @@ export default function PricingCard({
                           <div className="mt-[40px]">
                             {" "}
                             <p className="text-[15px]   text-[#3F3F3F] mt-0 font-regular text-left">
-                              This is suitable for a Large Restaurants, Hotels & 
+                              This is suitable for a Large Restaurants, Hotels &
                               Resorts
                             </p>
                           </div>
@@ -928,7 +927,7 @@ export default function PricingCard({
                           <div className="mt-[40px]">
                             {" "}
                             <p className="text-[15px]   text-[#3F3F3F] mt-0 font-regular text-left">
-                              This is suitable for a Large Restaurants ,Hotels & 
+                              This is suitable for a Large Restaurants ,Hotels &
                               Resorts
                             </p>
                           </div>
